@@ -6,10 +6,14 @@ Top secret cloud project
 Team members-
 ----------------
 
-Arpit Gupta - arpitg1991
-Anjishnu Kumar - anjishnu
-Vipul Raheja -
+Arpit Gupta - <b>arpitg1991</b>
+<br>
+Anjishnu Kumar - <b>anjishnu</b>
+<br>
+Vipul Raheja - <b>vipulraheja</b>
 
-Tech Stack Requirements/Discussion-
+Tech Discussion-
 -----------------------
 *Insert here*
+
+
