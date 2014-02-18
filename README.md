@@ -14,6 +14,18 @@ Vipul Raheja - <b>vipulraheja</b>
 
 Tech Discussion-
 -----------------------
-*Insert here*
+Software Architecture:
+MVC?
 
+Controller Stack:
+Ruby on Rails?
+Scala?
 
+DB:
+Mongo?
+HBase?
+Cassandra?
+
+View:
+Bootstrap?
+Reuse some appealing templates?
