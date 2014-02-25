@@ -42,3 +42,6 @@ Bootstrap?
 Reuse some appealing templates?
 
 <br>Anj - We were leaning towards making an Android app rather than a WebApp. I am a fan of bootstrap in case we go the web dev route though.
+
+---------------------
+Please build something that we can reuse later for the project
