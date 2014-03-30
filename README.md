@@ -45,3 +45,14 @@ Reuse some appealing templates?
 
 ---------------------
 Please build something that we can reuse later for the project
+-----------------------------------------------------------------
+
+User Post ->
+1) Free Text (Character limit ?)
+2) Valid Till ( defaults to 1 hour) 
+3) Event Location (Defaults to User Location)
+
+Feed -> 
+1) Sorted by (Distance, Popularity, Expiration)
+2) (Followers?)
+3) Post as anonymous 
