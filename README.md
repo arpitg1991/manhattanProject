@@ -60,7 +60,7 @@ Feed ->
 <br>
 <b>UPDATES/INDIVIDUAL</b>:
 
-<b>Anj:</b> I've spent the whole night tweaking and playing with GUI elements and breaking the code over and over understanding how to use DataObservers. I think I have understood most of it now and can tweak views with relative ease. I've also downloaded some Custom UI libraries for use in the final project. I even implemented a relatively simple piece of code that samples the image dataset, finds a good candidate, and then blurs it to make it the background image. This is gonna be (or at least Look) awesome.
+<b>31st March - Anj:</b> I've spent the whole night tweaking and playing with GUI elements and breaking the code over and over understanding how to use DataObservers. I think I have understood most of it now and can tweak views with relative ease. I've also downloaded some Custom UI libraries for use in the final project. I even implemented a relatively simple piece of code that samples the image dataset, finds a good candidate, and then blurs it to make it the background image. This is gonna be (or at least Look) awesome.
 <br>
 
 
