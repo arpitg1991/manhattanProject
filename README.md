@@ -48,11 +48,19 @@ Please build something that we can reuse later for the project
 -----------------------------------------------------------------
 
 User Post ->
-1) Free Text (Character limit ?)
-2) Valid Till ( defaults to 1 hour) 
-3) Event Location (Defaults to User Location)
-
+<br>1) Free Text (Character limit ?)
+<br>2) Valid Till ( defaults to 1 hour) 
+<br>3) Event Location (Defaults to User Location)
+<br><br>
 Feed -> 
-1) Sorted by (Distance, Popularity, Expiration)
-2) (Followers?)
-3) Post as anonymous 
+<br>1) Sorted by (Distance, Popularity, Expiration)
+<br>2) (Followers?)
+<br>3) Post as anonymous 
+
+<br>
+<b>UPDATES/INDIVIDUAL</b>:
+
+<b>Anj:</b> I've spent the whole night tweaking and playing with GUI elements and breaking the code over and over understanding how to use DataObservers. I think I have understood most of it now and can tweak views with relative ease. I've also downloaded some Custom UI libraries for use in the final project. I even implemented a relatively simple piece of code that samples the image dataset, finds a good candidate, and then blurs it to make it the background image. This is gonna be (or at least Look) awesome.
+<br>
+
+
