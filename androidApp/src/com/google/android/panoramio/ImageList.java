@@ -20,6 +20,10 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +72,8 @@ public class ImageList extends ListActivity {
         }
     }
     
+
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -77,8 +83,19 @@ public class ImageList extends ListActivity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View footer = inflater.inflate(R.layout.list_footer, listView, false);
         listView.addFooterView(footer, null, false);
-        setListAdapter(new ImageAdapter(this));
-
+        listView.setScrollingCacheEnabled(false);
+        
+        //Fancy colors effect  in the listView divider
+        int[] colors = {0, 0xFF7F00FF, 0}; // Transparent to purple to transparent
+        listView.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+        listView.setDividerHeight(2);
+        
+        ImageAdapter tempAdapter = new ImageAdapter(this);
+        tempAdapter.listView = listView;
+        //3D rotations
+        //listView.setRotationX(30);
+        //setListAdapter(new ImageAdapter(this));
+        setListAdapter(tempAdapter);
         // Theme.Light sets a background on our list.
         listView.setBackgroundDrawable(null);
         if (mImageManager.isLoading()) {
@@ -86,6 +103,8 @@ public class ImageList extends ListActivity {
                     Window.PROGRESS_VISIBILITY_ON);
             mImageManager.addObserver(mObserver);
         }
+        
+        //
         
         // Read the user's search area from the intent
         Intent i = getIntent();
@@ -105,7 +124,10 @@ public class ImageList extends ListActivity {
         i.putExtra(ImageManager.ZOOM_EXTRA, mZoom);
         i.putExtra(ImageManager.LATITUDE_E6_EXTRA, mLatitudeE6);
         i.putExtra(ImageManager.LONGITUDE_E6_EXTRA, mLongitudeE6);
-        startActivity(i);
+        
+        //Convert background to black instead of starting new activity
+        l.setBackgroundColor(Color.parseColor("#000000"));
+        //startActivity(i);
     }   
     
     
