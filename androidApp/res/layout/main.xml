@@ -28,13 +28,16 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:padding="10dip" >
-
+		
         <FrameLayout
+    
             android:id="@+id/frame"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@drawable/picture_frame" >
+        	android:background="@drawable/picture_frame"  >  
         </FrameLayout>
+        
+
     </FrameLayout>
 
 	<Button
@@ -42,7 +45,6 @@
  		android:layout_width="wrap_content" 
 	    android:layout_height="wrap_content" 
 	    android:layout_gravity="center_horizontal"
-	    
 	    android:text="@string/go"
 	    android:minWidth="150dip"
 	    android:layout_marginBottom="2dip"

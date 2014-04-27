@@ -39,31 +39,30 @@ public class ImageAdapter extends BaseAdapter {
      */
     private ImageManager mImageManager;
     public ListView listView;
-    
-   
-    
     private Context mContext;
-    
-    
+   
     private MyDataSetObserver mObserver;
 
     /**
      * Used by the {@link ImageManager} to report changes in the list back to
      * this adapter.
      */
+    
     private class MyDataSetObserver extends DataSetObserver {
         @Override
         public void onChanged() {
         	
         	//listView.setBackgroundResource(R.drawable.bg);
+        	listView.setBackgroundColor(Color.BLACK);
+
         	
-        	if (mImageManager.size()==2)
-        	{PanoramioItem s = mImageManager.get(1);
-        	Bitmap bitmap = s.getBitmap();
-        	bitmap = fastblur(bitmap,2);
-        	listView.setBackground(new android.graphics.drawable.BitmapDrawable(bitmap));
-        	}
-        	//listView.setBackgroundColor(Color.parseColor("#00FF00"));
+//        	if (mImageManager.size()==2)
+//        	{PanoramioItem s = mImageManager.get(1);
+//        	Bitmap bitmap = s.getBitmap();
+//        	bitmap = fastblur(bitmap,4);
+//        	listView.setBackground(new android.graphics.drawable.BitmapDrawable(bitmap));
+//        	}
+
             notifyDataSetChanged();
         }
 
@@ -150,6 +149,10 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     
+    
+    
+    
+   //Fastblur algorithm to compute the blurred version of an image really fast
     public Bitmap fastblur(Bitmap sentBitmap, int radius) {
 
         // Stack Blur v1.0 from

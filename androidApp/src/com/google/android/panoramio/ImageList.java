@@ -16,7 +16,12 @@
 
 package com.google.android.panoramio;
 
+
+
+import android.app.ActionBar;
 import android.app.ListActivity;
+import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
@@ -25,10 +30,18 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
+import android.util.Log;
+//import android.support.v7.app.ActionBar;
+//import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
+import android.widget.Toast;
 
 /**
  * Activity which displays the list of images.
@@ -36,7 +49,7 @@ import android.widget.ListView;
 public class ImageList extends ListActivity {
     
     ImageManager mImageManager;
-    
+    SearchActivity searchActvity = new SearchActivity();
     private MyDataSetObserver mObserver = new MyDataSetObserver();
 
     /**
@@ -58,7 +71,7 @@ public class ImageList extends ListActivity {
      * Observer used to turn the progress indicator off when the {@link ImageManager} is
      * done downloading.
      */
-    private class MyDataSetObserver extends DataSetObserver {
+    public class MyDataSetObserver extends DataSetObserver {
         @Override
         public void onChanged() {
             if (!mImageManager.isLoading()) {
@@ -76,35 +89,77 @@ public class ImageList extends ListActivity {
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+    	
+//      requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+//      super.onCreate(savedInstanceState);
+//      LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+      
+//      ActionBar actionBar = getActionBar();
+//      actionBar.setHomeButtonEnabled(true);
+//      actionBar.setDisplayShowTitleEnabled(true);
+//      actionBar.setDisplayHomeAsUpEnabled(true);
+      
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	//Old Code
+    	
+    	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         mImageManager = ImageManager.getInstance(this);
+        
+        ActionBar actionBar = getActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+//      
+        actionBar.setTitle("Seekr");
+        actionBar.setSubtitle("Your ad-hoc social network.");
+        SearchView searchview = new SearchView(this);
+        //searchview
         ListView listView = getListView();
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View footer = inflater.inflate(R.layout.list_footer, listView, false);
-        listView.addFooterView(footer, null, false);
+        //listView.addFooterView(footer, null, false);
         listView.setScrollingCacheEnabled(false);
         
         //Fancy colors effect  in the listView divider
-        int[] colors = {0, 0xFF7F00FF, 0}; // Transparent to purple to transparent
+        //int[] colors = {0, 0xFF7F00FF, 0}; // Transparent to purple to transparent
+        int[] colors = {0, 0xFFFFFFFF, 0}; // Transparent to white to transparent
+        
         listView.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
         listView.setDividerHeight(2);
         
         ImageAdapter tempAdapter = new ImageAdapter(this);
         tempAdapter.listView = listView;
-        //3D rotations
-        //listView.setRotationX(30);
-        //setListAdapter(new ImageAdapter(this));
         setListAdapter(tempAdapter);
+        
         // Theme.Light sets a background on our list.
+        
         listView.setBackgroundDrawable(null);
         if (mImageManager.isLoading()) {
             getWindow().setFeatureInt(Window.FEATURE_INDETERMINATE_PROGRESS,
                     Window.PROGRESS_VISIBILITY_ON);
             mImageManager.addObserver(mObserver);
         }
-        
-        //
+        listView.setBackgroundColor(Color.BLACK);
+        //l.setBackgroundColor(Color.parseColor("#000000"));
         
         // Read the user's search area from the intent
         Intent i = getIntent();
@@ -126,9 +181,61 @@ public class ImageList extends ListActivity {
         i.putExtra(ImageManager.LONGITUDE_E6_EXTRA, mLongitudeE6);
         
         //Convert background to black instead of starting new activity
-        l.setBackgroundColor(Color.parseColor("#000000"));
+        //l.setBackgroundColor(Color.parseColor("#000000"));
         //startActivity(i);
-    }   
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        
+    	MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+         SearchView searchView =
+                 (SearchView) menu.findItem(R.id.search).getActionView();
+         searchView.setSearchableInfo(
+                 searchManager.getSearchableInfo(getComponentName()));
+         searchView.setSubmitButtonEnabled(true);
+         
+         OnQueryTextListener queryListener = new OnQueryTextListener() {
+        	 
+        	 @Override
+        	 public boolean onQueryTextSubmit(String query)
+        	 {
+        		 
+        		 try
+        		 {
+        		 Toast.makeText(getApplicationContext(), "Seeking...", Toast.LENGTH_LONG).show();
+        		 Log.i("ImageList", "textSubmit");
+        		 
+        		 onSearchRequested();
+        		 return true;        		 
+        		 } 
+        		 
+        		 
+        		 catch(Exception e) { e.printStackTrace(); return false ; } 
+        		 
+        		 
+        	 }
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// TODO Absolutely nothing;
+				//Can't do anything 
+				return false;
+			}
+
+         };
+
+         searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(getApplicationContext(), SearchActivity.class)));
+         searchView.setQueryHint("Start Seeking...");
+         //searchView.setOnQueryTextListener(queryListener);
+         
+        return true;
+    
+    }
     
     
 }

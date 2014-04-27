@@ -21,15 +21,32 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+
+
+// README
+// Notes about project
+//
+//>> Adding Background with Image Downloaded from Panoramio
+//	
+//	//LOCATION: ImageAdapter.MyDataObserver
+//	
+//	Change code in ImageAdapter.MyDataObserver to keep sampling images from 
+//	the list in adapter until you find an image of sufficient darkness 
+//	then set that as the background.
+//	
+//
 
 /**
  * Activity which lets the user select a search area
@@ -45,14 +62,18 @@ public class Panoramio extends MapActivity implements OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+    	super.onCreate(savedInstanceState);      
         setContentView(R.layout.main);
+        
+        
         
         mImageManager = ImageManager.getInstance(this);
         
         FrameLayout frame = (FrameLayout) findViewById(R.id.frame);
         Button goButton = (Button) findViewById(R.id.go);
+        goButton.setText("Find nearby events");
         goButton.setOnClickListener(this);
        
         // Add the map view to the frame
@@ -73,6 +94,10 @@ public class Panoramio extends MapActivity implements OnClickListener {
         mMapView.setSatellite(true);
         
         addZoomControls(frame);
+        
+
+
+
     }
 
     @Override

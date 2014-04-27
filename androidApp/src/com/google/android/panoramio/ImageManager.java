@@ -242,7 +242,7 @@ public class ImageManager {
 
                     long id = obj.getLong("photo_id");
                     String title = obj.getString("photo_title");
-                    title = "chutiya" ;
+                    //title = "chutiya" ;
                     String owner = obj.getString("owner_name");
                     String thumb = obj.getString("photo_file_url");
                     String ownerUrl = obj.getString("owner_url");
