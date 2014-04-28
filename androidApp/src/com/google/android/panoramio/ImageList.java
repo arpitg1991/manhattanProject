@@ -174,15 +174,16 @@ public class ImageList extends ListActivity {
         
         // Create an intent to show a particular item.
         // Pass the user's search area along so the next activity can use it
-        Intent i = new Intent(this, ViewImage.class);
-        i.putExtra(ImageManager.PANORAMIO_ITEM_EXTRA, item);
-        i.putExtra(ImageManager.ZOOM_EXTRA, mZoom);
-        i.putExtra(ImageManager.LATITUDE_E6_EXTRA, mLatitudeE6);
-        i.putExtra(ImageManager.LONGITUDE_E6_EXTRA, mLongitudeE6);
+//        Intent i = new Intent(this, ViewImage.class);
+//        i.putExtra(ImageManager.PANORAMIO_ITEM_EXTRA, item);
+//        i.putExtra(ImageManager.ZOOM_EXTRA, mZoom);
+//        i.putExtra(ImageManager.LATITUDE_E6_EXTRA, mLatitudeE6);
+//        i.putExtra(ImageManager.LONGITUDE_E6_EXTRA, mLongitudeE6);
         
         //Convert background to black instead of starting new activity
         //l.setBackgroundColor(Color.parseColor("#000000"));
-        //startActivity(i);
+        Intent i = new Intent(this, MapDisplayActivity.class);
+        startActivity(i);
     }
     
     @Override
