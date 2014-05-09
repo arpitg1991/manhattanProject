@@ -16,10 +16,15 @@ Vipul Raheja - <b>vipulraheja</b>
 <b>APIs</b>
 ------------------------
 Post Event : /createPost
+<br>
 Get Event : /getPost
+<br>
 Post Comment : /createComment
+<br>
 Expected JSONS : Post Event : {"post":{"exp":"900","lon":"-73.960543","text":"VVAan","userId":"123","catId":"E","lat":"40.808142"}}
+<br>
 Get Event : /getPost?lat=-42&lon=70 received JSON 
+<br>
 
 <b>TODOs</b>
 ------------------------
