@@ -12,6 +12,24 @@ Anjishnu Kumar - <b>anjishnu</b>
 <br>
 Vipul Raheja - <b>vipulraheja</b>
 
+
+<b>APIs</b>
+------------------------
+Post Event : /createPost
+Get Event : /getPost
+Post Comment : /createComment
+Expected JSONS : Post Event : {"post":{"exp":"900","lon":"-73.960543","text":"VVAan","userId":"123","catId":"E","lat":"40.808142"}}
+Get Event : /getPost?lat=-42&lon=70 received JSON 
+
+<b>TODOs</b>
+------------------------
+- Add API for getComments?postId=abcXYZ (Arpit)
+- Code to populate ListView and CommentViews (Anjishnu)
+- Get the Map to start working (Anjishnu)
+- Vipul : Come up with features you can help with
+
+
+
 Tech Discussion-
 -----------------------
 Software Architecture:
