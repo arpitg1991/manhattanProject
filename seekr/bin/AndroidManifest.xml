@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.seekr"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="19" />
+    
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+    
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" /> 
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+        <meta-data
+    	android:name="com.google.android.gms.version"
+    	android:value="@integer/google_play_services_version" />
+    
+        
+        
+        <activity
+            android:name="com.example.seekr.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <meta-data android:value="@string/app_id" android:name="com.facebook.sdk.ApplicationId"/>
+        <activity android:name="com.facebook.LoginActivity" android:label="@string/app_name"></activity>
+                
+        <activity
+            android:name="com.example.seekr.Panoramio"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Panoramio" >
+        </activity>
+		<uses-library android:name="com.google.android.maps"/>
+        
+		<activity
+            android:name="com.example.seekr.ImageList"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchActivity" />
+        </activity>
+        
+        <activity
+            android:name="com.example.seekr.SearchActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        
+        <activity
+            android:name="com.example.seekr.ViewImage"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Panoramio" />
+
+        <activity
+            android:name="com.example.seekr.ViewMap"
+            android:label="@string/app_name" />
+        <uses-library android:name="com.google.android.maps" />
+        
+        <activity
+            android:name="com.example.seekr.MapDisplayActivity"
+            android:label="@string/title_activity_map" >
+	        <meta-data
+	            android:name="com.google.android.maps.v2.API_KEY"
+	            android:value="AIzaSyBPkxER39dAr2_vlIQEhsyQLiqT8I6e73I" />
+        </activity>
+        
+        <activity
+            android:name="com.example.seekr.ThreadActivity"
+            android:label="@string/app_name" >
+
+        </activity>
+	<meta-data
+    android:name="com.google.android.maps.v2.API_KEY"
+    android:value="AIzaSyBPkxER39dAr2_vlIQEhsyQLiqT8I6e73I"/>
+    </application>
+</manifest>
