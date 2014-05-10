@@ -29,11 +29,13 @@ Get Event : /getPost?lat=-42&lon=70 received JSON
 <b>TODOs</b>
 ------------------------
 - Add API for getComments?postId=abcXYZ (Arpit)
-- Code to populate ListView and CommentViews (Anjishnu)
-- Get the Map to start working (Anjishnu)
 - Vipul : Come up with features you can help with
+- Add makePost activity (Anjishnu)
 
-
+DONE -
+--------------
+- Get the Map to start working (Anjishnu)
+- Code to populate ListView and CommentViews (Anjishnu)
 
 Tech Discussion-
 -----------------------
