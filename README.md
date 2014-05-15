@@ -28,12 +28,13 @@ Get Event : /getPost?lat=-42&lon=70 received JSON
 
 <b>TODOs</b>
 ------------------------
-- Add API for getComments?postId=abcXYZ (Arpit)
-- Vipul : Come up with features you can help with
-- Add makePost activity (Anjishnu)
+- Vipul : Integrate Twitter Datamining code into Seekr
+- Add makePost activity (Anjishnu) (Still pending)
 
 DONE -
 --------------
+- Add API for getComments?postId=abcXYZ (Arpit)
+- Added chat section.
 - Get the Map to start working (Anjishnu)
 - Code to populate ListView and CommentViews (Anjishnu)
 
