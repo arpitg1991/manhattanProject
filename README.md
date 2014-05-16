@@ -30,7 +30,8 @@ Get Event : /getPost?lat=-42&lon=70 received JSON
 ------------------------
 
 - Vipul : Integrate Twitter Datamining code into Seekr
-
+- Anjishnu: Integrate makeNewPost with API
+- Integrate comments/chat with API
 
 DONE -
 --------------
