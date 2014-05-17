@@ -16,11 +16,11 @@
 
 package com.example.seekr;
 
-import com.google.android.maps.GeoPoint;
-
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.google.android.maps.GeoPoint;
 
 /**
  * Holds one item returned from the Panoramio server. This includes

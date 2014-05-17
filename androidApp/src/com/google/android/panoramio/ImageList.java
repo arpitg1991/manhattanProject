@@ -17,7 +17,6 @@
 package com.google.android.panoramio;
 
 
-
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.app.SearchManager;
@@ -26,13 +25,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 import android.util.Log;
-//import android.support.v7.app.ActionBar;
-//import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +38,9 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
+
+//import android.support.v7.app.ActionBar;
+//import android.support.v7.app.ActionBarActivity;
 
 /**
  * Activity which displays the list of images.

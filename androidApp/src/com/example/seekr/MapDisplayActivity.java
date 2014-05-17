@@ -1,17 +1,8 @@
 package com.example.seekr;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.*;
 
 
 public class MapDisplayActivity extends Activity {

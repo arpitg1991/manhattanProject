@@ -1,10 +1,7 @@
 package com.google.android.panoramio;
 
-import com.google.android.panoramio.ImageList.MyDataSetObserver;
-
 import android.app.ListFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;

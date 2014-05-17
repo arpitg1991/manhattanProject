@@ -16,9 +16,6 @@
 
 package com.google.android.panoramio;
 
-import com.google.android.maps.GeoPoint;
-
-import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 

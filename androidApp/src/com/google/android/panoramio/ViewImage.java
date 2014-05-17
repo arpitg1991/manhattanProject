@@ -16,8 +16,6 @@
 
 package com.google.android.panoramio;
 
-import com.google.android.maps.GeoPoint;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -34,6 +32,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.maps.GeoPoint;
 
 /**
  * Activity which displays a single image.
