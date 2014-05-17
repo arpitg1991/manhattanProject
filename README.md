@@ -33,6 +33,7 @@ Get Event : /getPost?lat=-42&lon=70 received JSON
 - Vipul : Convert video to GIF to make it mobile friendly
 - Arpit : Modify DB to incorporate user names and thumbnails
 - Arpit : Remove Posts if X no. of ppl commented
+- Arpit : Correct comments API
 - Anjishnu: - Integrate comments/chat with API
 - Anjishnu: Overlay Panoramio useless map with cool WebView
 
@@ -91,9 +92,6 @@ Feed ->
 <br>3) Post as anonymous 
 
 <br>
-<b>UPDATES/INDIVIDUAL</b>:
 
-<b>31st March - Anj:</b> I've spent the whole night tweaking and playing with GUI elements and breaking the code over and over understanding how to use DataObservers. I think I have understood most of it now and can tweak views with relative ease. I've also downloaded some Custom UI libraries for use in the final project. I even implemented a relatively simple piece of code that samples the image dataset, finds a good candidate, and then blurs it to make it the background image. This is gonna be (or at least Look) awesome.
-<br>
 
 
