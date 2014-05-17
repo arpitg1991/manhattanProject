@@ -32,6 +32,7 @@ Get Event : /getPost?lat=-42&lon=70 received JSON
 - Vipul : Integrate Twitter Datamining code into Seekr
 - Vipul : Convert video to GIF to make it mobile friendly
 - Arpit : Modify DB to incorporate user names and thumbnails
+- Arpit : Remove Posts if X no. of ppl commented
 - Anjishnu: - Integrate comments/chat with API
 - Anjishnu: Overlay Panoramio useless map with cool WebView
 
