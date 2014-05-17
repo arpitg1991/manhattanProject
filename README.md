@@ -28,14 +28,16 @@ Get Event : /getPost?lat=-42&lon=70 received JSON
 
 <b>TODOs</b>
 ------------------------
-
+- Vipul : Get UserID/UserName/Thumbnail from FB
 - Vipul : Integrate Twitter Datamining code into Seekr
-- Anjishnu: Integrate makeNewPost with API
-- Integrate comments/chat with API
+- Vipul : Convert video to GIF to make it mobile friendly
+- Arpit : Modify DB to incorporate user names and thumbnails
+- Anjishnu: - Integrate comments/chat with API
+- Anjishnu: Overlay Panoramio useless map with cool WebView
 
 DONE -
 --------------
-
+- Anjishnu: Integrate makeNewPost with API
 - Add makePost activity (Anjishnu) 
 - Add API for getComments?postId=abcXYZ (Arpit)
 - Added chat section.
