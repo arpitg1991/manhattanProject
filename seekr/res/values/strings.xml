@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SeekR</string>
+    <string name="app_id">274143092764504</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="get_started">To get started, login using Facebook</string>
+    <string name="skip_login">Skip Login</string>
+    <string name="login">Login</string>
+    <string name="settings">Settings</string>
+    <string name="action_settings">Settings</string>
+    <string name="logged_in">Welcome, you are now logged in.</string>
+    <string name="action_search">Search</string>
+    <string name="go">Search Panoramio</string>
+    <string name="menu_radar">Radar</string>
+    <string name="menu_map">Map</string>
+    <string name="menu_author">Author info</string>
+    <string name="menu_view">View on web</string>
+    <string name="untitled">Untitled</string>
+    <string name="no_radar_title">Radar not found</string>
+    <string name="no_radar">No radar activity has been installed. Please download Radar from the Market.</string>
+    <string name="copyright">Photos provided by Panoramio are under the copyright of their owners.</string>
+    <string name="title_activity_map">MapActivity</string>	
+    <string name="edit_message">Describe your event here</string>
+    <string name="expires_in">Enter expiry time</string>
+    <string name="button_send">Create</string>
+     
+    
+</resources>
