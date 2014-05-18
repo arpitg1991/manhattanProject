@@ -67,7 +67,7 @@ public class AsyncWebPostMaster extends AsyncTask {
 	
 	
 	static String create_post_url 			= "http://160.39.179.36:9000/createPost";    
-    static String get_data_url 				= "http://160.39.179.36:8080/getPost?";
+    static String get_data_url 				= "http://160.39.179.36:8/getPost?";
 	static String get_comments_url 			= "http://160.39.179.36:9000/getComments?";
 	static String search_url 				= "http://160.39.179.36:8080/searchPosts?";
 	static String create_comment_url		= "http://160.39.179.36:9000/createComment?";

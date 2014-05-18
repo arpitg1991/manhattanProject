@@ -75,7 +75,6 @@ public class ThreadActivity extends Activity {
 		
 		//-----------------------------------------------//
 		//------------EDIT TEXT STUFF -------------------------//
-
 		editText1 = (EditText) findViewById(R.id.editText1);
 		editText1.setCursorVisible(true);
 		editText1.setHint("Add your text here-");
@@ -117,9 +116,8 @@ public class ThreadActivity extends Activity {
 				// If the event is a key-down event on the "enter" button
 				if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 					// Perform action on key press
-					
-					postComment();
-					adapter.add(new OneComment(false, editText1.getText().toString(), userId));
+					//postComment();
+					adapter.add(new OneComment(false, editText1.getText().toString()));
 					editText1.setText("");
 					return true;
 				}
@@ -128,18 +126,16 @@ public class ThreadActivity extends Activity {
 		});
 		//------------EDIT TEXT STUFF -------------------------//
 
-		//addItems();
+		addItems();
 	}
 
 	public void postComment()
 	{
 		
-		
 		AsyncWebPostMaster postman = new AsyncWebPostMaster(userId, getApplicationContext());
 		String comment = editText1.getText().toString();
-		Log.i(tag,"Posting message to server:" +postId + " with userId:" +userId);
-		postman.execute(postman.new_comment, comment, postId);
-		Toast.makeText(getApplicationContext(), "Message posted to server",Toast.LENGTH_SHORT).show();
+		//OneComment newComment = new OneComment(false, editText1.getText().toString());
+		postman.execute(postman.new_comment,comment);
 		
 	}
 	
