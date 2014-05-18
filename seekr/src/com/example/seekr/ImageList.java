@@ -42,6 +42,7 @@ import android.view.Window;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -52,6 +53,8 @@ public class ImageList extends ListActivity {
     ImageManager mImageManager;
     SearchActivity searchActvity = new SearchActivity();
     private MyDataSetObserver mObserver = new MyDataSetObserver();
+    
+    private String tag = "ImageList";
 
     private String userId = "Akuma";
     
@@ -78,6 +81,13 @@ public class ImageList extends ListActivity {
      * Observer used to turn the progress indicator off when the {@link ImageManager} is
      * done downloading.
      */
+    
+    private View headerView;
+    
+    /**
+     * Handle on the headerView to populate text in; 
+     */
+    
 
     public class MyDataSetObserver extends DataSetObserver {        
     	@Override
@@ -92,11 +102,11 @@ public class ImageList extends ListActivity {
         }
     }
     
-
-    
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	
+    	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        super.onCreate(savedInstanceState);
+        
     	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         mImageManager = ImageManager.getInstance(this);
@@ -111,7 +121,12 @@ public class ImageList extends ListActivity {
         SearchView searchview = new SearchView(this);
         ListView listView = getListView();
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View footer = inflater.inflate(R.layout.list_footer, listView, false);
+        TextView footer = (TextView) inflater.inflate(R.layout.list_footer, listView, false);        
+        footer.setBackgroundColor(Color.WHITE);
+        footer.setText("");
+        
+        listView.addHeaderView(footer);
+        
         
         listView.setScrollingCacheEnabled(false);
         
@@ -119,6 +134,8 @@ public class ImageList extends ListActivity {
         
         listView.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
         listView.setDividerHeight(2);
+
+ 
         
         ImageAdapter tempAdapter = new ImageAdapter(this);
         tempAdapter.listView = listView;
@@ -133,20 +150,111 @@ public class ImageList extends ListActivity {
             mImageManager.addObserver(mObserver);
         }
         listView.setBackgroundColor(Color.BLACK);
-        //l.setBackgroundColor(Color.parseColor("#000000"));
         
+        //l.setBackgroundColor(Color.parseColor("#000000"));    
         // Read the user's search area from the intent
+        
         Intent i = getIntent();
    
         mZoom = i.getIntExtra(ImageManager.ZOOM_EXTRA, Integer.MIN_VALUE);
         mLatitudeE6 = i.getIntExtra(ImageManager.LATITUDE_E6_EXTRA, Integer.MIN_VALUE);
         mLongitudeE6 = i.getIntExtra(ImageManager.LONGITUDE_E6_EXTRA, Integer.MIN_VALUE);
         
-        AsyncWebPostMaster awpm = new AsyncWebPostMaster("1234", getApplicationContext());
-        awpm.setImageManager(mImageManager);
-        awpm.execute(awpm.get_data, mLatitudeE6/1000000.0, mLongitudeE6/1000000.0);
+        
+        
+        
+    }
+    
+    protected void onResume()
+    {
+    	
+    	
+    	
+       super.onResume();
+   		
+       
+       
+   	mImageManager = ImageManager.getInstance(this);
+    
+    ActionBar actionBar = getActionBar();
+    actionBar.setHomeButtonEnabled(true);
+    actionBar.setDisplayShowTitleEnabled(true);
+    actionBar.setDisplayHomeAsUpEnabled(true);      
+    actionBar.setTitle("Seekr");
+    actionBar.setSubtitle("Your ad-hoc social network.");
+            
+    SearchView searchview = new SearchView(this);
+    ListView listView = getListView();
+    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    TextView footer = (TextView) inflater.inflate(R.layout.list_footer, listView, false);        
+    footer.setBackgroundColor(Color.WHITE);
+    footer.setText("");
+    
+    listView.addHeaderView(footer);
+    
+    
+    listView.setScrollingCacheEnabled(false);
+    
+    int[] colors = {0, 0xFFFFFFFF, 0}; // Transparent to white to transparent
+    
+    listView.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+    listView.setDividerHeight(2);
+
+
+    
+    ImageAdapter tempAdapter = new ImageAdapter(this);
+    tempAdapter.listView = listView;
+    
+    
+    setListAdapter(tempAdapter);
+            
+    
+    if (mImageManager.isLoading()) {
+        getWindow().setFeatureInt(Window.FEATURE_INDETERMINATE_PROGRESS,
+                Window.PROGRESS_VISIBILITY_ON);
+        mImageManager.addObserver(mObserver);
+    }
+    listView.setBackgroundColor(Color.BLACK);
+    
+    //l.setBackgroundColor(Color.parseColor("#000000"));    
+    // Read the user's search area from the intent
+    
+    Intent i = getIntent();
+
+    mZoom = i.getIntExtra(ImageManager.ZOOM_EXTRA, Integer.MIN_VALUE);
+    mLatitudeE6 = i.getIntExtra(ImageManager.LATITUDE_E6_EXTRA, Integer.MIN_VALUE);
+    mLongitudeE6 = i.getIntExtra(ImageManager.LONGITUDE_E6_EXTRA, Integer.MIN_VALUE);
+
+       
+       
+       
+       
+       
+       
+       
+       this.mImageManager.clear();
+        i = getIntent();
+       String searchQuery = i.getStringExtra( this.SEARCH_SERVICE);
+       if (searchQuery==null)
+       	Log.i(tag, "is null");
+       
+       if (searchQuery == null) {
+       	Log.i(tag, "Executing regular load");
+       	AsyncWebPostMaster awpm = new AsyncWebPostMaster(userId, getApplicationContext());
+       	awpm.setImageManager(mImageManager);
+       	awpm.execute(awpm.get_data, mLatitudeE6/1000000.0, mLongitudeE6/1000000.0);
+       
+       }	else {
+       	Log.i(tag, "Executing search");
+       	AsyncWebPostMaster awpm = new AsyncWebPostMaster(userId, getApplicationContext());
+       	awpm.setImageManager(mImageManager);
+       	awpm.execute(awpm.search_data, searchQuery);
+       }
+
+       
     }
 
+    
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
 

@@ -59,16 +59,18 @@ public class AsyncWebPostMaster extends AsyncTask {
 	static String tag = "WebPostMaster";
 	static String userId;
 	
-	static String create_comment_url	= 	"http://shrouded-retreat-3846.herokuapp.com/createComment";
-	static String create_post_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/createPost";
-	static String get_data_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/getPost?";
-	static String search_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/searchPosts?";
-	static String get_comments_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/getComments?";
+//	static String create_comment_url	= 	"http://shrouded-retreat-3846.herokuapp.com/createComment";
+//	static String create_post_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/createPost";
+//	static String get_data_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/getPost?";
+//	static String search_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/searchPosts?";
+//	static String get_comments_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/getComments?";
 	
 	
-	//static String create_post_url = "http://160.39.179.36:9000/createPost";    
-    //static String get_data_url = "http://160.39.179.36:9000/getPost?";
-	//public static String get_comments_url = "http://160.39.179.36:9000/getComments?";
+	static String create_post_url 			= "http://160.39.179.36:9000/createPost";    
+    static String get_data_url 				= "http://160.39.179.36:8080/getPost?";
+	static String get_comments_url 			= "http://160.39.179.36:9000/getComments?";
+	static String search_url 				= "http://160.39.179.36:8080/searchPosts?";
+	static String create_comment_url		= "http://160.39.179.36:9000/createComment?";
 	
     private static Context context;
     public static String new_post 		= "NEW_POST";
@@ -265,7 +267,7 @@ public class AsyncWebPostMaster extends AsyncTask {
 //    	params.put("dist","20000");
     	params.put("searchText", searchText);
     	
-    	String response = sendGetRequest(params, get_data_url);
+    	String response = sendGetRequest(params, search_url);
     	Log.i(tag, "Response loaded" + response);
     	return response;
 
@@ -289,7 +291,7 @@ public class AsyncWebPostMaster extends AsyncTask {
 	    Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 		customResponse response = null;
 		String query = (String)params[0];
-		Log.i(tag, "Initiating doInBackground");
+		Log.i(tag, "Initiating doInBackground"+query);
 		try {
 			
 			if 	(query.equals(new_post)){	
@@ -396,14 +398,14 @@ public class AsyncWebPostMaster extends AsyncTask {
 			}
 		}
 
-		if (cres.responseType.equals(this.get_data)){
+		if (cres.responseType.equals(this.get_data) || cres.responseType.equals(this.search_data)){
 			
 			//Do third thing;
 			
 			Log.i(tag, "Entering responsetype " + this.get_data);
 
 			try {	
-				Log.i(tag,cres.responseBody);
+				Log.i(tag, cres.responseBody);
 				JSONObject json = new JSONObject(cres.responseBody);
 				JSONArray jarray = (JSONArray)json.get("post");
 				
@@ -421,7 +423,9 @@ public class AsyncWebPostMaster extends AsyncTask {
 					}
 				} 				
 				catch (JSONException e) {	
-					e.printStackTrace(); 	
+					Log.e(tag, e.getMessage()); 	
+				} catch (Exception e) {
+					Log.e(tag, e.getMessage());
 				}
 			}
 		} 
