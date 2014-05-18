@@ -142,6 +142,7 @@ public class MainActivity extends FragmentActivity {
 	        System.out.println("SESSION STATE");
 	        System.out.println(state.name());
 	              
+	        
 	        if (state.isOpened()) {
 	            // If the session state is open:
 	            // Show the authenticated fragment
