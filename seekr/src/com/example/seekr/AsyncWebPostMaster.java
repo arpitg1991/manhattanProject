@@ -58,30 +58,31 @@ public class AsyncWebPostMaster extends AsyncTask {
 
 	static String tag = "WebPostMaster";
 	static String userId;
-	static String create_comment_url = "http://shrouded-retreat-3846.herokuapp.com/createComment";
-	static String create_post_url = "http://shrouded-retreat-3846.herokuapp.com/createPost";
-	static String get_data_url = "http://shrouded-retreat-3846.herokuapp.com/getPost?";
-	static String get_comments_url = "http://shrouded-retreat-3846.herokuapp.com/getComments?";
+	
+	static String create_comment_url	= 	"http://shrouded-retreat-3846.herokuapp.com/createComment";
+	static String create_post_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/createPost";
+	static String get_data_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/getPost?";
+	static String search_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/searchPosts?";
+	static String get_comments_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/getComments?";
 	
 	
 	//static String create_post_url = "http://160.39.179.36:9000/createPost";    
     //static String get_data_url = "http://160.39.179.36:9000/getPost?";
 	//public static String get_comments_url = "http://160.39.179.36:9000/getComments?";
 	
-    static Context context;
-    public static String new_post = "NEW_POST";
-    public static String new_comment = "NEW_COMMENT";
-    public static String get_data = "GET_DATA";
-    public static String get_comments = "GET_COMMENTS";
-    
+    private static Context context;
+    public static String new_post 		= "NEW_POST";
+    public static String new_comment 	= "NEW_COMMENT";
+    public static String get_data 		= "GET_DATA";
+    public static String search_data 	= "SEARCH_DATA";
+    public static String get_comments 	= "GET_COMMENTS";
     
     
     private static Gson gson = new Gson();
     private ThreadArrayAdapter t_adapter;
     private ImageManager img_mgr;
     private Context myContext;
-    //private static AsyncWebPostMaster instance = null;
-     
+    
     
 	public AsyncWebPostMaster(String userId, Context context) {
 	    this.userId = userId;
@@ -115,26 +116,27 @@ public class AsyncWebPostMaster extends AsyncTask {
 			uriBuilder.appendQueryParameter(key, params.get(key));
 		}
 				
-		Uri uri = uriBuilder.build();
-		
-		Log.i(tag, "Constructed get Request : " + uri.toString());
-		
+		Uri uri = uriBuilder.build();		
+		Log.i(tag, "Constructed get Request : " + uri.toString());		
 		HttpGet request = new HttpGet(uri.toString());
 		String response = null;
         ResponseHandler<String> responseHandler=new BasicResponseHandler();
-        //String responseBody = httpclient.execute(httppost, responseHandler);
-
-		try{
-			 response = client.execute(request, responseHandler);
-			Log.i(tag, "Response body=\n"+response);
-			//response = client.execute(request);
-		}
-		catch (ClientProtocolException E) { Log.i(tag, "Caught ClientSideException");}
-		catch (IOException E) {Log.i(tag, "Caught IOException");}
-		finally{
-			client.getConnectionManager().shutdown();
-		}
+        
+		try	{			 
+				response = client.execute(request, responseHandler);
+				Log.i(tag, "Response body=\n"+response);
+			}
 		
+		catch (ClientProtocolException E) {			
+				Log.i(tag, "Caught ClientSideException");		
+			}
+		
+		catch (IOException E) {			
+				Log.i(tag, "Caught IOException");
+			}
+		finally	{			
+				client.getConnectionManager().shutdown();				
+			}
 		return response;
     }
 
@@ -142,23 +144,23 @@ public class AsyncWebPostMaster extends AsyncTask {
 	public String postJSON(String jsonString, String url)
 	{
 		int statusCode= 0;
-		
 		HttpClient httpClient = new DefaultHttpClient();
-		
 		HttpResponse response = null;
 		String responseBody = null;
-		try{
-			
-		HttpPost postRequest = new HttpPost(url);
-		StringEntity input = new StringEntity(jsonString);
-		input.setContentType("application/json");
-		postRequest.setEntity(input);
-		response = httpClient.execute(postRequest);
-		responseBody = new BasicResponseHandler().handleResponse(response);
-		statusCode = response.getStatusLine().getStatusCode();
-		Log.i(tag,response.getStatusLine().toString());
-		Log.i(tag,response.getEntity().getContent().toString());
-		}
+		
+		try	{
+		
+				HttpPost postRequest = new HttpPost(url);
+				StringEntity input = new StringEntity(jsonString);
+				input.setContentType("application/json");
+				postRequest.setEntity(input);
+				response = httpClient.execute(postRequest);
+				responseBody = new BasicResponseHandler().handleResponse(response);
+				statusCode = response.getStatusLine().getStatusCode();
+				Log.i(tag,response.getStatusLine().toString());
+				Log.i(tag,response.getEntity().getContent().toString());
+			}
+		
 		catch (Exception ex) {
 			ex.printStackTrace();
 			Log.e(tag, "Response code"+ new Integer(statusCode));//Error Handling goes here
@@ -227,25 +229,42 @@ public class AsyncWebPostMaster extends AsyncTask {
     	
     }
     
-    public String getData (String lat, String lon) throws Exception{
+    public String getData (String lat, String lon) throws Exception {
     	
     	Log.i(tag, "Entered getData Call");
     	//Get data to populate the list
-    	if (this.img_mgr==null){
-    		
+    	if (this.img_mgr==null){    		
     		Log.e(tag, "ImageAdapter not set: Not executing");
     		return null;
     	}
-    	
-    	
-    	System.out.println("in getpost") ;
-    	
-    	
-    	
+    	    	
+    	System.out.println("in getpost") ;    	    	    	
     	Map<String, String> params = new HashMap<String, String>();
     	params.put("lat", lat.toString());
     	params.put("lon",lon.toString());
     	params.put("dist","20000");
+    	String response = sendGetRequest(params, get_data_url);
+    	Log.i(tag, "Response loaded" + response);
+    	return response;
+
+    }
+    
+    public String searchData (String searchText, String lat, String lon) throws Exception {
+    	
+    	Log.i(tag, "Entered searchData Call");
+    	//Get data to populate the list
+    	if (this.img_mgr==null){    		
+    		Log.e(tag, "ImageAdapter not set: Not executing");
+    		return null;
+    	}
+    	    	    	    	    	
+    	Map<String, String> params = new HashMap<String, String>();
+    	
+//    	params.put("lat", lat.toString());
+//    	params.put("lon",lon.toString());
+//    	params.put("dist","20000");
+    	params.put("searchText", searchText);
+    	
     	String response = sendGetRequest(params, get_data_url);
     	Log.i(tag, "Response loaded" + response);
     	return response;
@@ -305,6 +324,16 @@ public class AsyncWebPostMaster extends AsyncTask {
 				Log.i(tag, "loaded new response" + response.responseBody);
 			}
 			
+			else if (query.equals(search_data)){
+				
+				String searchText = params[1].toString();
+				//String lat = params[1].toString();
+				//String lon = params[2].toString();
+				Log.i(tag, "Searching for text "+searchText);
+				response = new customResponse(query, searchData(searchText, null, null));
+				Log.i(tag, "loaded new response" + response.responseBody);
+			}
+			
 			else if (query.equals(get_comments)){
 				
 				String postId = params[1].toString();
@@ -338,35 +367,47 @@ public class AsyncWebPostMaster extends AsyncTask {
 		if (cres.responseType.equals(this.get_comments)){
 			//Do second thing
 			try {
+				
 				JSONObject json = new JSONObject(cres.responseBody);
-				//JSONObject json = transformResponseToJSON(cres);
 				Log.i(tag, "JSON received: " + json.toString());
 				JSONArray commentsList = json.getJSONArray("comment");
+				
+				String lastUser = "";
+				boolean bool = false;				
 				for (int i=0; i< commentsList.length(); i++) {
+					
 					JSONObject singleComment = commentsList.getJSONObject(i);
 					String commentUser = singleComment.getString("userId");
-					boolean bool = false;
-					if (!commentUser.equals(userId))
-						bool = true;
+					
+					//if (!commentUser.equals(userId))
+					if (!commentUser.equals(lastUser))	{
+						
+								bool = !bool ;
+								lastUser = commentUser ;
+					}
+					
 					t_adapter.add(new OneComment(bool, singleComment.getString("text"), commentUser));
 				}
-				
 			} catch (JSONException e) {
+				
 				// TODO Auto-generated catch block
-				Log.e(tag, "JSONParsingfailed"+ e.getMessage());
-						}
+				
+				Log.e(tag, "JSONParsingfailed"+ e.getMessage());			
+			}
 		}
 
 		if (cres.responseType.equals(this.get_data)){
+			
 			//Do third thing;
+			
 			Log.i(tag, "Entering responsetype " + this.get_data);
-		try {	
+
+			try {	
 				Log.i(tag,cres.responseBody);
 				JSONObject json = new JSONObject(cres.responseBody);
 				JSONArray jarray = (JSONArray)json.get("post");
 				
-				//json = (JSONObject) jarray.get(0);
-				//Log.i(tag, "Individual JSONObject:" + json.toString());
+
 				
 				for (int i=0; i<jarray.length(); i++)
 				{
@@ -379,28 +420,9 @@ public class AsyncWebPostMaster extends AsyncTask {
 					Log.i(tag, "View added");
 					}
 				} 				
-		
-		catch (JSONException e) {	e.printStackTrace(); 	
-		}}
-		
-	} }
-	
-
-	
-//	 public JSONObject transformResponseToJSON(customResponse cR) throws JSONException, IOException {
-//		 HttpResponse response = cR.responseBody;
-//		 if (response!=null){
-//		 BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-//		 StringBuilder builder = new StringBuilder();
-//		 for (String line = null; (line = reader.readLine()) != null;) {
-//		     builder.append(line).append("\n");
-//		 } 		 
-//		 JSONTokener tokener = new JSONTokener(builder.toString());
-//		 JSONObject finalResult = new JSONObject(tokener);
-//		 Log.i(tag,"JSON Response"+finalResult.toString());
-//		 
-//		 return finalResult;}
-//		 else
-//			 return null;
-//	 }
-
+				catch (JSONException e) {	
+					e.printStackTrace(); 	
+				}
+			}
+		} 
+	}

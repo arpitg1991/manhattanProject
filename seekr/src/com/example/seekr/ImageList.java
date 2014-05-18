@@ -78,15 +78,15 @@ public class ImageList extends ListActivity {
      * Observer used to turn the progress indicator off when the {@link ImageManager} is
      * done downloading.
      */
-    public class MyDataSetObserver extends DataSetObserver {
-        @Override
+
+    public class MyDataSetObserver extends DataSetObserver {        
+    	@Override
         public void onChanged() {
             if (!mImageManager.isLoading()) {
                 getWindow().setFeatureInt(Window.FEATURE_INDETERMINATE_PROGRESS,
                         Window.PROGRESS_VISIBILITY_OFF);
             }
         }
-
         @Override
         public void onInvalidated() {
         }
@@ -107,22 +107,14 @@ public class ImageList extends ListActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);      
         actionBar.setTitle("Seekr");
         actionBar.setSubtitle("Your ad-hoc social network.");
-        
-        //actionBar.addTab(tab, setSelected);
-        
+                
         SearchView searchview = new SearchView(this);
-
-        //searchview
         ListView listView = getListView();
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View footer = inflater.inflate(R.layout.list_footer, listView, false);
         
-        //listView.addFooterView(footer, null, false);
-        
         listView.setScrollingCacheEnabled(false);
         
-        //Fancy colors effect  in the listView divider
-        //int[] colors = {0, 0xFF7F00FF, 0}; // Transparent to purple to transparent
         int[] colors = {0, 0xFFFFFFFF, 0}; // Transparent to white to transparent
         
         listView.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
@@ -133,11 +125,7 @@ public class ImageList extends ListActivity {
         
         
         setListAdapter(tempAdapter);
-        
-        // Theme.Light sets a background on our list.
-        
-        //listView.setBackgroundDrawable(null);
-        
+                
         
         if (mImageManager.isLoading()) {
             getWindow().setFeatureInt(Window.FEATURE_INDETERMINATE_PROGRESS,
@@ -161,10 +149,11 @@ public class ImageList extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        PanoramioItem item = mImageManager.get(position);   
+
+    	PanoramioItem item = mImageManager.get(position);   
         
-        // Create an intent to show a particular item.
-        // Pass the user's search area along so the next activity can use it
+//        	Create an intent to show a particular item.
+//        	Pass the user's search area along so the next activity can use it
 //        Intent i = new Intent(this, ViewImage.class);
 //        i.putExtra(ImageManager.PANORAMIO_ITEM_EXTRA, item);
 //        i.putExtra(ImageManager.ZOOM_EXTRA, mZoom);
@@ -175,10 +164,13 @@ public class ImageList extends ListActivity {
         //l.setBackgroundColor(Color.parseColor("#000000"));
         //Intent i = new Intent(this, MapDisplayActivity.class);
         
-        Intent i = new Intent(this, ThreadActivity.class);
+         Intent i = new Intent(this, ThreadActivity.class);
+        
+        i.putExtra("userId", userId);
         i.putExtra("lat", mLatitudeE6);
         i.putExtra("long", mLongitudeE6);
         i.putExtra("postId", item.getPostId());
+        
         startActivity(i);
         
         

@@ -75,6 +75,7 @@ public class ThreadActivity extends Activity {
 		
 		//-----------------------------------------------//
 		//------------EDIT TEXT STUFF -------------------------//
+
 		editText1 = (EditText) findViewById(R.id.editText1);
 		editText1.setCursorVisible(true);
 		editText1.setHint("Add your text here-");
@@ -118,8 +119,7 @@ public class ThreadActivity extends Activity {
 					// Perform action on key press
 					
 					postComment();
-					
-					adapter.add(new OneComment(false, editText1.getText().toString()));
+					adapter.add(new OneComment(false, editText1.getText().toString(), userId));
 					editText1.setText("");
 					return true;
 				}
@@ -128,7 +128,7 @@ public class ThreadActivity extends Activity {
 		});
 		//------------EDIT TEXT STUFF -------------------------//
 
-		addItems();
+		//addItems();
 	}
 
 	public void postComment()

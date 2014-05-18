@@ -3,7 +3,7 @@
     
     <item android:id="@+id/search"
 		  android:title="What are you looking for?"
-          android:icon="@drawable/action_location"
+          android:icon="@drawable/ic_action_place"
           android:showAsAction="collapseActionView|ifRoom"
           android:actionViewClass="android.widget.SearchView" />
     

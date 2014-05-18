@@ -30,6 +30,8 @@ public class SearchActivity extends Activity {
             
             Log.i(this.getClass().getSimpleName(), "Reached SearchActivity - insert processing here");
             Toast.makeText(getApplicationContext(), "Search activated", Toast.LENGTH_LONG).show();
+            
+            
             finish();
             //use the query to search your data somehow
         }
