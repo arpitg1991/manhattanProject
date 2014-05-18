@@ -126,7 +126,7 @@ public class ThreadActivity extends Activity {
 		});
 		//------------EDIT TEXT STUFF -------------------------//
 
-		addItems();
+		//addItems();
 	}
 
 	public void postComment()

@@ -12,6 +12,9 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
+    <permission
+      android:name="com.example.seekr.permission.MAPS_RECEIVE"
+      android:protectionLevel="signature"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -19,12 +22,16 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-
+    
+	
+	
     <application
+
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Coolactionbar" >
+        <uses-library android:name="com.google.android.maps"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -84,21 +91,24 @@
 
         <uses-library android:name="com.google.android.maps" />
 
-        <activity android:name="com.example.seekr.MapDisplayActivity" >
-            <meta-data
-                android:name="com.google.android.maps.v2.API_KEY"
-                android:value="AIzaSyBPkxER39dAr2_vlIQEhsyQLiqT8I6e73I" />
-        </activity>
+        
         <activity
             android:name="com.example.seekr.ThreadActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity android:name="com.example.seekr.CustomWebActivity" />
         <activity android:name="com.example.seekr.NewPostActivity" />
+        
         <activity
             android:name="com.example.seekr.EventAddressActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar" >
+            <meta-data
+                android:name="com.google.android.maps.v2.API_KEY"
+                android:value="AIzaSyBPkxER39dAr2_vlIQEhsyQLiqT8I6e73I" />
+        </activity>
+        
+        <activity android:name="com.example.seekr.MapDisplayActivity" >
             <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
                 android:value="AIzaSyBPkxER39dAr2_vlIQEhsyQLiqT8I6e73I" />

@@ -59,18 +59,18 @@ public class AsyncWebPostMaster extends AsyncTask {
 	static String tag = "WebPostMaster";
 	static String userId;
 	
-//	static String create_comment_url	= 	"http://shrouded-retreat-3846.herokuapp.com/createComment";
-//	static String create_post_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/createPost";
-//	static String get_data_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/getPost?";
-//	static String search_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/searchPosts?";
-//	static String get_comments_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/getComments?";
+	static String create_comment_url	= 	"http://shrouded-retreat-3846.herokuapp.com/createComment";
+	static String create_post_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/createPost";
+	static String get_data_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/getPost?";
+	static String search_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/searchPosts?";
+	static String get_comments_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/getComments?";
 	
 	
-	static String create_post_url 			= "http://160.39.179.36:9000/createPost";    
-    static String get_data_url 				= "http://160.39.179.36:8/getPost?";
-	static String get_comments_url 			= "http://160.39.179.36:9000/getComments?";
-	static String search_url 				= "http://160.39.179.36:8080/searchPosts?";
-	static String create_comment_url		= "http://160.39.179.36:9000/createComment?";
+//	static String create_post_url 			= "http://160.39.179.36:9000/createPost";    
+//    static String get_data_url 				= "http://160.39.179.36:8/getPost?";
+//	static String get_comments_url 			= "http://160.39.179.36:9000/getComments?";
+//	static String search_url 				= "http://160.39.179.36:8080/searchPosts?";
+//	static String create_comment_url		= "http://160.39.179.36:9000/createComment?";
 	
     private static Context context;
     public static String new_post 		= "NEW_POST";
@@ -240,7 +240,7 @@ public class AsyncWebPostMaster extends AsyncTask {
     		return null;
     	}
     	    	
-    	System.out.println("in getpost") ;    	    	    	
+	    	
     	Map<String, String> params = new HashMap<String, String>();
     	params.put("lat", lat.toString());
     	params.put("lon",lon.toString());
@@ -423,9 +423,9 @@ public class AsyncWebPostMaster extends AsyncTask {
 					}
 				} 				
 				catch (JSONException e) {	
-					Log.e(tag, e.getMessage()); 	
+					Log.e(tag, "JSONException" + e.getMessage()); 	
 				} catch (Exception e) {
-					Log.e(tag, e.getMessage());
+					Log.e(tag, "Somecrap" + e.getMessage());
 				}
 			}
 		} 

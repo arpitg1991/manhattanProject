@@ -122,10 +122,10 @@ public class ImageList extends ListActivity {
         ListView listView = getListView();
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         TextView footer = (TextView) inflater.inflate(R.layout.list_footer, listView, false);        
-        footer.setBackgroundColor(Color.WHITE);
+        footer.setBackgroundColor(Color.RED);
         footer.setText("");
-        
-        listView.addHeaderView(footer);
+        footer.setClickable(false);
+        //listView.addFooterView(footer);
         
         
         listView.setScrollingCacheEnabled(false);
@@ -174,56 +174,56 @@ public class ImageList extends ListActivity {
    		
        
        
-   	mImageManager = ImageManager.getInstance(this);
-    
-    ActionBar actionBar = getActionBar();
-    actionBar.setHomeButtonEnabled(true);
-    actionBar.setDisplayShowTitleEnabled(true);
-    actionBar.setDisplayHomeAsUpEnabled(true);      
-    actionBar.setTitle("Seekr");
-    actionBar.setSubtitle("Your ad-hoc social network.");
-            
-    SearchView searchview = new SearchView(this);
-    ListView listView = getListView();
-    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    TextView footer = (TextView) inflater.inflate(R.layout.list_footer, listView, false);        
-    footer.setBackgroundColor(Color.WHITE);
-    footer.setText("");
-    
-    listView.addHeaderView(footer);
-    
-    
-    listView.setScrollingCacheEnabled(false);
-    
-    int[] colors = {0, 0xFFFFFFFF, 0}; // Transparent to white to transparent
-    
-    listView.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
-    listView.setDividerHeight(2);
-
-
-    
-    ImageAdapter tempAdapter = new ImageAdapter(this);
-    tempAdapter.listView = listView;
-    
-    
-    setListAdapter(tempAdapter);
-            
-    
-    if (mImageManager.isLoading()) {
-        getWindow().setFeatureInt(Window.FEATURE_INDETERMINATE_PROGRESS,
-                Window.PROGRESS_VISIBILITY_ON);
-        mImageManager.addObserver(mObserver);
-    }
-    listView.setBackgroundColor(Color.BLACK);
-    
-    //l.setBackgroundColor(Color.parseColor("#000000"));    
-    // Read the user's search area from the intent
-    
-    Intent i = getIntent();
-
-    mZoom = i.getIntExtra(ImageManager.ZOOM_EXTRA, Integer.MIN_VALUE);
-    mLatitudeE6 = i.getIntExtra(ImageManager.LATITUDE_E6_EXTRA, Integer.MIN_VALUE);
-    mLongitudeE6 = i.getIntExtra(ImageManager.LONGITUDE_E6_EXTRA, Integer.MIN_VALUE);
+//   	mImageManager = ImageManager.getInstance(this);
+//    
+//    ActionBar actionBar = getActionBar();
+//    actionBar.setHomeButtonEnabled(true);
+//    actionBar.setDisplayShowTitleEnabled(true);
+//    actionBar.setDisplayHomeAsUpEnabled(true);      
+//    actionBar.setTitle("Seekr");
+//    actionBar.setSubtitle("Your ad-hoc social network.");
+//            
+//    SearchView searchview = new SearchView(this);
+//    ListView listView = getListView();
+//    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//    TextView footer = (TextView) inflater.inflate(R.layout.list_footer, listView, false);        
+//    footer.setBackgroundColor(Color.WHITE);
+//    footer.setText("");
+//    
+//    listView.addHeaderView(footer);
+//    
+//    
+//    listView.setScrollingCacheEnabled(false);
+//    
+//    int[] colors = {0, 0xFFFFFFFF, 0}; // Transparent to white to transparent
+//    
+//    listView.setDivider(new GradientDrawable(Orientation.RIGHT_LEFT, colors));
+//    listView.setDividerHeight(2);
+//
+//
+//    
+//    ImageAdapter tempAdapter = new ImageAdapter(this);
+//    tempAdapter.listView = listView;
+//    
+//    
+//    setListAdapter(tempAdapter);
+//            
+//    
+//    if (mImageManager.isLoading()) {
+//        getWindow().setFeatureInt(Window.FEATURE_INDETERMINATE_PROGRESS,
+//                Window.PROGRESS_VISIBILITY_ON);
+//        mImageManager.addObserver(mObserver);
+//    }
+//    listView.setBackgroundColor(Color.BLACK);
+//    
+//    //l.setBackgroundColor(Color.parseColor("#000000"));    
+//    // Read the user's search area from the intent
+//    
+//    Intent i = getIntent();
+//
+//    mZoom = i.getIntExtra(ImageManager.ZOOM_EXTRA, Integer.MIN_VALUE);
+//    mLatitudeE6 = i.getIntExtra(ImageManager.LATITUDE_E6_EXTRA, Integer.MIN_VALUE);
+//    mLongitudeE6 = i.getIntExtra(ImageManager.LONGITUDE_E6_EXTRA, Integer.MIN_VALUE);
 
        
        
@@ -233,7 +233,7 @@ public class ImageList extends ListActivity {
        
        
        this.mImageManager.clear();
-        i = getIntent();
+       Intent i = getIntent();
        String searchQuery = i.getStringExtra( this.SEARCH_SERVICE);
        if (searchQuery==null)
        	Log.i(tag, "is null");
