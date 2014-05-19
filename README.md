@@ -15,15 +15,11 @@ Vipul Raheja - <b>vipulraheja</b>
 
 <b>TODOs</b>
 ------------------------
-- Vipul : Get UserID/UserName/Thumbnail from FB
-- Vipul : Integrate Twitter Datamining code into Seekr
-- Vipul : Convert video to GIF to make it mobile friendly
-- Arpit : Modify DB to incorporate user names and thumbnails
-- Arpit : Remove Posts if X no. of ppl commented
-- Arpit : Correct comments API
-- Anjishnu: - Integrate comments/chat with API
-- Anjishnu: Overlay Panoramio useless map with cool WebView
-
+- Arpit : Integrate Twitter Datamining code into Seekr
+- Arpit : Get image from facebook 
+- 
+- Anjishnu : add categories and open search.
+- Vipul : Maps!!
 DONE -
 --------------
 - Anjishnu: Integrate makeNewPost with API
@@ -32,7 +28,13 @@ DONE -
 - Added chat section.
 - Get the Map to start working (Anjishnu)
 - Code to populate ListView and CommentViews (Anjishnu)
-
+- Vipul : Get UserID/UserName/Thumbnail from FB
+- Vipul : Convert video to GIF to make it mobile friendly
+- Vipul : Integrate Twitter Datamining code into Seekr
+- Vipul : Integrate Twitter Datamining code into Seekr
+- Anjishnu: - Integrate comments/chat with API
+- Anjishnu: Overlay Panoramio useless map with cool WebView
+- Arpit : Remove Posts if X no. of ppl commented
 
 
 
@@ -51,8 +53,12 @@ Get Event : /getPost?lat=-42&lon=70 received JSON
 <br>
 
 
+CATEGORIES of EVENTS : 
 
-
+SPORTS
+FOOD
+NEWS
+ENTERTAINMENT
 
 
 
