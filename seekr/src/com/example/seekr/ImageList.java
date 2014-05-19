@@ -24,12 +24,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.GradientDrawable.Orientation;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 //import android.support.v7.app.ActionBar;
 //import android.support.v7.app.ActionBarActivity;
@@ -56,7 +59,8 @@ public class ImageList extends ListActivity {
     
     private String tag = "ImageList";
 
-    private String userId = "Akuma";
+    private String userId = UserInfoProvider.getInstance().getUserId();
+    private String userName = UserInfoProvider.getInstance().getUserName();
     
     /**
      * 	UserId for the current user: Dummy variable for my app.  
@@ -137,11 +141,7 @@ public class ImageList extends ListActivity {
 
  
         
-        ImageAdapter tempAdapter = new ImageAdapter(this);
-        tempAdapter.listView = listView;
         
-        
-        setListAdapter(tempAdapter);
                 
         
         if (mImageManager.isLoading()) {
@@ -149,7 +149,7 @@ public class ImageList extends ListActivity {
                     Window.PROGRESS_VISIBILITY_ON);
             mImageManager.addObserver(mObserver);
         }
-        listView.setBackgroundColor(Color.BLACK);
+        //listView.setBackgroundColor(Color.BLACK);
         
         //l.setBackgroundColor(Color.parseColor("#000000"));    
         // Read the user's search area from the intent
@@ -160,8 +160,28 @@ public class ImageList extends ListActivity {
         mLatitudeE6 = i.getIntExtra(ImageManager.LATITUDE_E6_EXTRA, Integer.MIN_VALUE);
         mLongitudeE6 = i.getIntExtra(ImageManager.LONGITUDE_E6_EXTRA, Integer.MIN_VALUE);
         
+        ImageAdapter tempAdapter = new ImageAdapter(this);
+        tempAdapter.listView = listView;
+        setListAdapter(tempAdapter);
         
+		Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.anon);
+		UserInfoProvider info = UserInfoProvider.getInstance();
+		info.setImageBitmap(bm);
+		byte[] imageBytes= info.getImageAsByteArray();
+		
+		String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+		
+		Log.i(tag, "String representation:\n"+imageString);
+		byte[] decodedArray = Base64.decode(imageString, Base64.DEFAULT);
+		Bitmap bm2 = BitmapFactory.decodeByteArray(decodedArray, 0, decodedArray.length);
+		Log.i(tag, "Comparing image and image after decoding"+ imageBytes.equals(decodedArray));
+        //listView.setBackground();
+        actionBar.setIcon(new BitmapDrawable(getResources(),bm2));
+        AsyncWebPostMaster awp = new AsyncWebPostMaster(userId, getApplicationContext());
+        awp.execute(awp.new_post, "anon", "0","0", "100", imageString);
+
         
+        Log.i(tag, "anon image sent");
         
     }
     

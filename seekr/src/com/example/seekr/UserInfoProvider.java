@@ -3,11 +3,12 @@ package com.example.seekr;
 import java.io.ByteArrayOutputStream;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 public class UserInfoProvider {
 
 	//Singleton class to provide information to all activities.
-	
+	static String tag = "UserInfoProvider";
 	String userName;
 	String userId;
 	Bitmap fbAvatarBitmap;
@@ -24,7 +25,8 @@ public class UserInfoProvider {
 		if (sInstance!=null)
 			return sInstance;
 		else {
-			sInstance = new UserInfoProvider(); 
+			sInstance = new UserInfoProvider();
+			Log.i(tag, "Creating new instance");
 			return sInstance;
 			}
 		}

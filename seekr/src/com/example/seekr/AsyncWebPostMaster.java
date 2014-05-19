@@ -17,6 +17,7 @@ import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
@@ -44,12 +45,20 @@ import org.json.JSONTokener;
 
 
 
+
+
+
+
+
 //import org.json.JSONObject;
 import com.google.gson.*;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -57,8 +66,10 @@ import android.widget.Toast;
 public class AsyncWebPostMaster extends AsyncTask {
 
 	static String tag = "WebPostMaster";
-	static String userId;
 	
+    private String userId = UserInfoProvider.getInstance().getUserId();
+    private String userName = UserInfoProvider.getInstance().getUserName();
+
 	static String create_comment_url	= 	"http://shrouded-retreat-3846.herokuapp.com/createComment";
 	static String create_post_url 		= 	"http://shrouded-retreat-3846.herokuapp.com/createPost";
 	static String get_data_url 			= 	"http://shrouded-retreat-3846.herokuapp.com/getPost?";
@@ -146,13 +157,17 @@ public class AsyncWebPostMaster extends AsyncTask {
 	public String postJSON(String jsonString, String url)
 	{
 		int statusCode= 0;
-		HttpClient httpClient = new DefaultHttpClient();
+	    final HttpParams httpParams = new BasicHttpParams();
+	    HttpConnectionParams.setConnectionTimeout(httpParams, 30000);
+		HttpClient httpClient = new DefaultHttpClient(httpParams);
+	
 		HttpResponse response = null;
 		String responseBody = null;
 		
 		try	{
 		
 				HttpPost postRequest = new HttpPost(url);
+				
 				StringEntity input = new StringEntity(jsonString);
 				input.setContentType("application/json");
 				postRequest.setEntity(input);
@@ -180,19 +195,26 @@ public class AsyncWebPostMaster extends AsyncTask {
 		
 		HashMap<String, String> post = new HashMap<String,String>();
 		
-		public PostPOJO(String comment, String lat, String lon, String Expiry){
+		public PostPOJO(String comment, String lat, String lon, String Expiry, String imgText){
 			
-			post.put("userId", userId);			post.put("text", comment);
-	    	post.put("catId","E");				post.put("lat", lat);
-	    	post.put("lon",lon);				post.put("exp",Expiry);
+			post.put("userId", userId);			
+			post.put("text", comment);
+			post.put("userName", userName);		
+			post.put("userPic", imgText);
+	    	post.put("catId","E");				
+	    	post.put("lat", lat);
+	    	post.put("lon",lon);				
+	    	post.put("exp",Expiry);
+	    	
+	    	Log.i(tag, "Name of user: " + userName);
 	    	
 		}
 	}
 	
-	public String createPost(String comment, String lat, String lon, String expiry) throws Exception {
+	public String createPost(String comment, String lat, String lon,  String expiry, String imgText) throws Exception {
     	Log.i(tag,"Creating Post"); 
     	Map<String, String> post = new HashMap<String, String>();
-    	String jsonString = gson.toJson(new PostPOJO(comment, lat.toString(), lon.toString(), expiry.toString()));
+    	String jsonString = gson.toJson(new PostPOJO(comment, lat.toString(), lon.toString(), expiry.toString(), imgText));
     	Log.i(tag,"Created JSON String - \n" + jsonString);    	
     	return postJSON(jsonString, create_post_url);
     }
@@ -201,7 +223,11 @@ public class AsyncWebPostMaster extends AsyncTask {
 	public class CommentPOJO{
 		HashMap<String, String> comment = new HashMap<String,String>();
 		public CommentPOJO(String postId, String text) 		{
-			comment.put("postId",postId); 			comment.put("userId", userId); 			comment.put("text", text);	    	
+			
+			comment.put("postId",postId); 						comment.put("text", text);
+			comment.put("userName", userName);					comment.put("userId", userId); 
+			
+			
 		}
 	}
 
@@ -289,6 +315,9 @@ public class AsyncWebPostMaster extends AsyncTask {
 	protected Object doInBackground(Object... params) {
 
 	    Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+	    
+	    UserInfoProvider creds = UserInfoProvider.getInstance();
+	    Log.i(tag, "UserName: " + creds.getUserName() );
 		customResponse response = null;
 		String query = (String)params[0];
 		Log.i(tag, "Initiating doInBackground"+query);
@@ -302,8 +331,16 @@ public class AsyncWebPostMaster extends AsyncTask {
 				String lat = (String)params[2];
 				String lon = (String)params[3];
 				String expiry = (String) params[4];
+				String imgText;
+				try{
+				 imgText = (String) params[5];
+				}
+				catch(Exception e) {
+					imgText = null;
+				}
+				
 				Log.i(tag, "Variables received: \nText:"+text + "\nlat:"+lat+"\nlong:"+lon+"\nexpiry:"+expiry);
-				response = new customResponse(query, createPost(text,lat,lon,expiry));
+				response = new customResponse(query, createPost(text,lat,lon,expiry, imgText));
 			}
 			
 			
@@ -356,6 +393,26 @@ public class AsyncWebPostMaster extends AsyncTask {
 	@Override
 	protected void onPostExecute(Object response)
 	{
+		
+		//Testbed
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		customResponse cres = (customResponse) response;
 		Log.i(tag,"onPostExecute: "+cres.responseType.equals(this.get_data));
 		 

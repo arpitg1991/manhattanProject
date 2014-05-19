@@ -54,6 +54,7 @@ import android.widget.FrameLayout;
  * Activity which lets the user select a search area
  *
  */
+
 public class Panoramio extends MapActivity implements OnClickListener {
     private MapView mMapView;
     private MyLocationOverlay mMyLocationOverlay;
@@ -71,7 +72,7 @@ public class Panoramio extends MapActivity implements OnClickListener {
         
         mImageManager = ImageManager.getInstance(this);
         
-        getWindow().getDecorView().setBackgroundColor(Color.BLACK);;
+        getWindow().getDecorView().setBackgroundColor(Color.BLACK);
         
         FrameLayout frame = (FrameLayout) findViewById(R.id.frame);
         frame.setBackgroundColor(Color.BLACK);

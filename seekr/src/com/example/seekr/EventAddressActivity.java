@@ -93,7 +93,8 @@ public class EventAddressActivity extends MapActivity
  
         mapView = (MapView) findViewById(R.id.mapView);
         LinearLayout zoomLayout = (LinearLayout)findViewById(R.id.zoom);  
-        View zoomView = mapView.getZoomControls(); 
+        @SuppressWarnings("deprecation")
+		View zoomView = mapView.getZoomControls(); 
  
         zoomLayout.addView(zoomView, 
             new LinearLayout.LayoutParams(
@@ -119,7 +120,7 @@ public class EventAddressActivity extends MapActivity
         listOfOverlays.clear();
         listOfOverlays.add(mapOverlay);        
 
-        mapView.invalidate();
+        //mapView.invalidate();
     }
  
     @Override

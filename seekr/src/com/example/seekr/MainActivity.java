@@ -231,28 +231,31 @@ public class MainActivity extends FragmentActivity {
 								+ user.getUsername() + ","
 								+ user.getId() + "," + user.getLink()
 								+ "," + user.getFirstName()+ user.asMap().get("email"));
-
+						
+						UserInfoProvider info = UserInfoProvider.getInstance();
 						// USER ID
 						String USER_ID = user.getId();
+						info.setUserId(USER_ID);
 
 						// USER NAME
-						String USER_NAME = user.getUsername();
-
+						String NAME_OF_USER = user.getName();
+						info.setUserName(NAME_OF_USER);
 						// DISPLAY IMAGE
 						URL fbAvatarUrl = null;
 						Bitmap fbAvatarBitmap = null;
-						try {
-							fbAvatarUrl = new URL("http://graph.facebook.com/" + USER_ID + "/picture");
-							fbAvatarBitmap = BitmapFactory.decodeStream(fbAvatarUrl.openConnection().getInputStream());
-						} catch (MalformedURLException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+//						try {
+//							fbAvatarUrl = new URL("http://graph.facebook.com/" + USER_ID + "/picture");
+//							fbAvatarBitmap = BitmapFactory.decodeStream(fbAvatarUrl.openConnection().getInputStream());
+//						} catch (MalformedURLException e) {
+//							e.printStackTrace();
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
+						
 						ByteArrayOutputStream stream = new ByteArrayOutputStream();
-						fbAvatarBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-						byte[] byteArray = stream.toByteArray();
+						info.setImageBitmap(fbAvatarBitmap);
+//						fbAvatarBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//						byte[] byteArray = stream.toByteArray();
 					}
 				}
 			});

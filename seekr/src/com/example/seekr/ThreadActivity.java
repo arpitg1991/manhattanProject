@@ -5,6 +5,7 @@ import java.util.Random;
 
 
 
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.SearchManager;
@@ -35,8 +36,9 @@ import android.widget.SearchView.OnQueryTextListener;
 public class ThreadActivity extends Activity {
 	
 	private String tag = "ThreadActivity";
-	private String userId;
-	private String postId;
+    private String userId = UserInfoProvider.getInstance().getUserId();
+    private String userName = UserInfoProvider.getInstance().getUserName();
+    private String postId;
 	private ThreadArrayAdapter adapter;
 	private ListView lv;
 	private View sepView;
@@ -114,10 +116,18 @@ public class ThreadActivity extends Activity {
 		editText1.setOnKeyListener(new OnKeyListener() {
 		public boolean onKey(View v, int keyCode, KeyEvent event) {
 				// If the event is a key-down event on the "enter" button
-				if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+				
+			if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 					// Perform action on key press
-					//postComment();
-					adapter.add(new OneComment(false, editText1.getText().toString()));
+					//
+					
+					if (editText1.getText().toString().equals(""))
+					{
+						Toast.makeText(getApplicationContext(), "Cannot post empty string", Toast.LENGTH_LONG).show();
+						return false;
+					}
+					postComment();
+					adapter.add(new OneComment(false, editText1.getText().toString(), userId, userName));
 					editText1.setText("");
 					return true;
 				}
