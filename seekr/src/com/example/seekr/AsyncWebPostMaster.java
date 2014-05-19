@@ -346,6 +346,8 @@ public class AsyncWebPostMaster extends AsyncTask {
 			
 			else if (query.equals(new_comment)) {
 				
+				Log.i(tag, "Trying to process "+new_comment);
+				
 				String comment = (String) params[1];
 				String postId = (String)  params[2];
 				Log.i(tag, "Creating new variables "+"comment:"+comment + " postId"+postId);
@@ -435,15 +437,22 @@ public class AsyncWebPostMaster extends AsyncTask {
 					
 					JSONObject singleComment = commentsList.getJSONObject(i);
 					String commentUser = singleComment.getString("userId");
-					
+					String commentUserName = null;
+					try{
+					commentUserName = singleComment.getString("userName");
+					} catch(Exception e) {};
 					//if (!commentUser.equals(userId))
 					if (!commentUser.equals(lastUser))	{
 						
 								bool = !bool ;
 								lastUser = commentUser ;
 					}
-					
-					t_adapter.add(new OneComment(bool, singleComment.getString("text"), commentUser));
+					if (commentUserName!=null){
+						
+						t_adapter.add(new OneComment(bool, singleComment.getString("text"), commentUser, commentUserName));						
+					} else {
+						t_adapter.add(new OneComment(bool, singleComment.getString("text"), commentUser));
+					}
 				}
 			} catch (JSONException e) {
 				

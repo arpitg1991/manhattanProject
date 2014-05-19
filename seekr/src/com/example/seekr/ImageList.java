@@ -32,6 +32,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.GradientDrawable.Orientation;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Base64;
 import android.util.Log;
 //import android.support.v7.app.ActionBar;
@@ -149,10 +150,7 @@ public class ImageList extends ListActivity {
                     Window.PROGRESS_VISIBILITY_ON);
             mImageManager.addObserver(mObserver);
         }
-        //listView.setBackgroundColor(Color.BLACK);
-        
-        //l.setBackgroundColor(Color.parseColor("#000000"));    
-        // Read the user's search area from the intent
+
         
         Intent i = getIntent();
    
@@ -179,9 +177,6 @@ public class ImageList extends ListActivity {
 //        actionBar.setIcon(new BitmapDrawable(getResources(),bm2));
 //        AsyncWebPostMaster awp = new AsyncWebPostMaster(userId, getApplicationContext());
 //        awp.execute(awp.new_post, "anon", "0","0", "100", imageString);
-
-        
-//        Log.i(tag, "anon image sent");
         
     }
     
@@ -257,21 +252,25 @@ public class ImageList extends ListActivity {
        String searchQuery = i.getStringExtra( this.SEARCH_SERVICE);
        if (searchQuery==null)
        	Log.i(tag, "is null");
-       
+       else
+    	Log.i(tag, "SearQuery=="+searchQuery);
+       	
        if (searchQuery == null) {
-       	Log.i(tag, "Executing regular load");
-       	AsyncWebPostMaster awpm = new AsyncWebPostMaster(userId, getApplicationContext());
-       	awpm.setImageManager(mImageManager);
-       	awpm.execute(awpm.get_data, mLatitudeE6/1000000.0, mLongitudeE6/1000000.0);
+       		Log.i(tag, "Executing regular load");
+       		AsyncWebPostMaster awpm = new AsyncWebPostMaster(userId, getApplicationContext());
+       		awpm.setImageManager(mImageManager);
+       		awpm.execute(awpm.get_data, mLatitudeE6/1000000.0, mLongitudeE6/1000000.0);
        
-       }	else {
-       	Log.i(tag, "Executing search");
-       	AsyncWebPostMaster awpm = new AsyncWebPostMaster(userId, getApplicationContext());
-       	awpm.setImageManager(mImageManager);
-       	awpm.execute(awpm.search_data, searchQuery);
+       } else {
+       	
+    	   	Log.i(tag, "Executing search");
+       		ActionBar aBar = getActionBar();
+       		aBar.setTitle(searchQuery);
+       		aBar.setSubtitle(null);
+       		AsyncWebPostMaster awpm = new AsyncWebPostMaster(userId, getApplicationContext());
+       		awpm.setImageManager(mImageManager);
+       		awpm.execute(awpm.search_data, searchQuery);
        }
-
-       
     }
 
     
@@ -279,26 +278,17 @@ public class ImageList extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
 
     	PanoramioItem item = mImageManager.get(position);   
-        
-//        	Create an intent to show a particular item.
-//        	Pass the user's search area along so the next activity can use it
-//        Intent i = new Intent(this, ViewImage.class);
-//        i.putExtra(ImageManager.PANORAMIO_ITEM_EXTRA, item);
-//        i.putExtra(ImageManager.ZOOM_EXTRA, mZoom);
-//        i.putExtra(ImageManager.LATITUDE_E6_EXTRA, mLatitudeE6);
-//        i.putExtra(ImageManager.LONGITUDE_E6_EXTRA, mLongitudeE6);
-        
-        //Convert background to black instead of starting new activity
-        //l.setBackgroundColor(Color.parseColor("#000000"));
-        //Intent i = new Intent(this, MapDisplayActivity.class);
-        
+                
          Intent i = new Intent(this, ThreadActivity.class);
+        PanoramioItem temp = mImageManager.get(position);
         
-        i.putExtra("userId", userId);
+        i.putExtra("userId", temp.getUserId());
         i.putExtra("lat", mLatitudeE6);
         i.putExtra("long", mLongitudeE6);
         i.putExtra("postId", item.getPostId());
-        
+        i.putExtra("message", temp.getText());
+        i.putExtra("poster", temp.getUserName());
+        //i.putExtra("location", temp.getLocation; //For when it is created.
         startActivity(i);
         
         
@@ -325,8 +315,7 @@ public class ImageList extends ListActivity {
         	 
         	 @Override
         	 public boolean onQueryTextSubmit(String query)
-        	 {
-        		 
+        	 {        		 
         		 try
         		 {
         		 Toast.makeText(getApplicationContext(), "Seeking...", Toast.LENGTH_LONG).show();
@@ -334,12 +323,8 @@ public class ImageList extends ListActivity {
         		 
         		 onSearchRequested();
         		 return true;        		 
-        		 } 
-        		 
-        		 
-        		 catch(Exception e) { e.printStackTrace(); return false ; } 
-        		 
-        		 
+        		 }         		         		 
+        		 catch(Exception e) { e.printStackTrace(); return false ; }         		         		 
         	 }
 
 			@Override
@@ -361,21 +346,48 @@ public class ImageList extends ListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{         
-		switch (item.getItemId())
-		{
+		switch (item.getItemId()) {
+		
+
+		
 		case R.id.new_post_button:
-			//Toast.makeText(MainActivity.this, "DebugScreen is selected", Toast.LENGTH_SHORT).show();
+
 			Intent intent = new Intent(this, NewPostActivity.class);
 			intent.putExtra("LatitudeE6", mLatitudeE6);
 			intent.putExtra("LongitudeE6", mLongitudeE6);
 			intent.putExtra("userId", userId);
 			startActivity(intent);
+			return true;
+			
+			
+		case R.id.action_culture:
+			Toast.makeText(getApplicationContext(), "culture", Toast.LENGTH_SHORT).show();
+			startSearch("#Culture", false, null, false);
+
+			return true;
+			
+		case R.id.action_alerts:
+			Toast.makeText(getApplicationContext(), "Alerts", Toast.LENGTH_SHORT).show();
+			startSearch("#Alerts", false, null, false);
+			return true;
+			
+		case R.id.action_sports:
+			startSearch("#Sports", false, null, false);
+			Toast.makeText(getApplicationContext(), "Sports", Toast.LENGTH_SHORT).show();
 			
 			return true;
-
-
+		case R.id.action_music:
+			startSearch("#Music", false, null, false);
+			Toast.makeText(getApplicationContext(), "Music", Toast.LENGTH_SHORT).show();
+			return true;
+			
+		case R.id.action_food:
+			startSearch("#Food", false, null, false);
+			Toast.makeText(getApplicationContext(), "Food", Toast.LENGTH_SHORT).show();
+			return true;
 
 		default:
+			finish();
 			return super.onOptionsItemSelected(item);
 		}
 	}

@@ -17,20 +17,15 @@ public class UserInfoProvider {
 	int  LatE6;
 	int  LonE6;
 	
-	static UserInfoProvider sInstance = null;
+	private static UserInfoProvider sInstance = new UserInfoProvider();
 	
 	private UserInfoProvider() {
 	}
 	
 	
 	public static UserInfoProvider getInstance() {
-		if (sInstance!=null)
+
 			return sInstance;
-		else {
-			sInstance = new UserInfoProvider();
-			Log.i(tag, "Creating new instance");
-			return sInstance;
-			}
 		}
 	
 	public void setUserName(String userName) {

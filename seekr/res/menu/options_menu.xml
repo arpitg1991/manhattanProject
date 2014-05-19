@@ -13,10 +13,19 @@
           />
     
     <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
+    <item android:id="@+id/action_food"
+          android:title="@string/action_food"
           android:showAsAction="never" />
-
-
-    
+    <item android:id="@+id/action_alerts"
+          android:title="@string/action_alerts"
+          android:showAsAction="never" />
+    <item android:id="@+id/action_sports"
+          android:title="@string/action_sports"
+          android:showAsAction="never" />
+    <item android:id="@+id/action_music"
+          android:title="@string/action_music"
+          android:showAsAction="never" />
+    <item android:id="@+id/action_culture"
+          android:title="@string/action_culture"
+          android:showAsAction="never" />    
 </menu>

@@ -1433,6 +1433,7 @@ containing a value of this type.
         public static final int white=0x7f0200d0;
     }
     public static final class id {
+        public static final int action_alerts=0x7f070074;
         public static final int action_bar=0x7f070021;
         public static final int action_bar_activity_content=0x7f07001a;
         public static final int action_bar_container=0x7f070020;
@@ -1441,11 +1442,15 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f070028;
         public static final int action_bar_title=0x7f070027;
         public static final int action_context_bar=0x7f070022;
+        public static final int action_culture=0x7f070077;
+        public static final int action_food=0x7f070073;
         public static final int action_menu_divider=0x7f07001b;
         public static final int action_menu_presenter=0x7f07001c;
         public static final int action_mode_close_button=0x7f070029;
+        public static final int action_music=0x7f070076;
         public static final int action_search=0x7f070070;
         public static final int action_settings=0x7f07006f;
+        public static final int action_sports=0x7f070075;
         public static final int activity_chooser_view_content=0x7f07002a;
         public static final int always=0x7f070011;
         public static final int beginning=0x7f070016;
@@ -1677,8 +1682,13 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f08003f;
+        public static final int action_alerts=0x7f08005c;
+        public static final int action_culture=0x7f080059;
+        public static final int action_food=0x7f08005b;
+        public static final int action_music=0x7f08005d;
         public static final int action_search=0x7f08004a;
         public static final int action_settings=0x7f080048;
+        public static final int action_sports=0x7f08005a;
         public static final int app_id=0x7f080042;
         public static final int app_name=0x7f080041;
         /**   Title for notification shown when GooglePlayServices needs to be

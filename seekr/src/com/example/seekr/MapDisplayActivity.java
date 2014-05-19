@@ -58,10 +58,12 @@ public class MapDisplayActivity extends Activity {
        Log.i(className, "Latitude :" + latitude.toString() + " Longitude :" + longitude.toString());
        sydney = new LatLng(latitude, longitude);
        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10));
-
+       String poster  = i.getStringExtra("poster");
+       String message = i.getStringExtra("message");
+       Log.i("Map", "poster: "+poster + " message: "+message);
         map.addMarker(new MarkerOptions()
-                .title("Sydney")
-                .snippet("The most populous city in Australia.")
+                .title(poster)
+                .snippet(message)
                 .position(sydney));
         
     }

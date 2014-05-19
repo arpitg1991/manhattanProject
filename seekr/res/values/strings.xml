@@ -26,4 +26,10 @@
     <string name="button_send">Create</string>
     <string name="enter_location"> Location? (Current)</string> 
     
+    <string name="action_culture">Culture</string>
+    <string name="action_sports">Sports</string>
+    <string name="action_food">Food</string>
+    <string name="action_alerts">Alerts</string>
+    <string name="action_music">Music</string>
+    
 </resources>

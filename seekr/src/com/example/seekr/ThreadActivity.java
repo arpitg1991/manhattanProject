@@ -6,6 +6,7 @@ import java.util.Random;
 
 
 
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.SearchManager;
@@ -29,6 +30,7 @@ import android.view.View.OnTouchListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 //import de.svenjacobs.loremipsum.LoremIpsum;
 import android.widget.SearchView.OnQueryTextListener;
@@ -39,6 +41,9 @@ public class ThreadActivity extends Activity {
     private String userId = UserInfoProvider.getInstance().getUserId();
     private String userName = UserInfoProvider.getInstance().getUserName();
     private String postId;
+    private String message;
+    private String location;
+    private String poster;
 	private ThreadArrayAdapter adapter;
 	private ListView lv;
 	private View sepView;
@@ -47,6 +52,7 @@ public class ThreadActivity extends Activity {
 	private String className = "ThreadActivity";
 	private Integer latitudeE6;
 	private Integer longitudeE6;
+	private PanoramioItem myItem;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,8 +62,12 @@ public class ThreadActivity extends Activity {
 		random = new Random();
 		
         Intent i = getIntent();
-        userId = i.getStringExtra("userId");
+        //userId = i.getStringExtra("userId");
+        poster= i.getStringExtra("poster");
         postId = i.getStringExtra("postId");
+        message = i.getStringExtra("message");
+        Log.i(tag, "Message:"+message);
+        location = i.getStringExtra("location");
         
         latitudeE6 = i.getIntExtra("lat", Integer.MIN_VALUE);
         longitudeE6 = i.getIntExtra("long", Integer.MIN_VALUE);
@@ -102,16 +112,7 @@ public class ThreadActivity extends Activity {
 					}			
 		});
 		
-		editText1.setOnClickListener(
-				new OnClickListener(){
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						if (v.getAlpha()==0.5)
-							v.setAlpha(1);
-						else
-							v.setAlpha((float)0.5); 
-					}});
+
 		
 		editText1.setOnKeyListener(new OnKeyListener() {
 		public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -136,16 +137,16 @@ public class ThreadActivity extends Activity {
 		});
 		//------------EDIT TEXT STUFF -------------------------//
 
-		//addItems();
+		addItems();
 	}
 
 	public void postComment()
 	{
-		
+		Log.i(tag, userId);
 		AsyncWebPostMaster postman = new AsyncWebPostMaster(userId, getApplicationContext());
 		String comment = editText1.getText().toString();
 		//OneComment newComment = new OneComment(false, editText1.getText().toString());
-		postman.execute(postman.new_comment,comment);
+		postman.execute(postman.new_comment,comment, postId);
 		
 	}
 	
@@ -168,15 +169,16 @@ public class ThreadActivity extends Activity {
 		
 	}
 	private void addItems() {
-		adapter.add(new OneComment(true, "Start Commenting here..."));
 
-		for (int i = 0; i < 4; i++) {
-			boolean left = getRandomInteger(0, 1) == 0 ? true : false;
-			int word = getRandomInteger(1, 10);
-			int start = getRandomInteger(1, 40);
-			String words = "LOL";
-			adapter.add(new OneComment(left, words));
-		}
+		adapter.add(new OneComment(true, message, userId, userName));
+
+//		for (int i = 0; i < 4; i++) {
+//			boolean left = getRandomInteger(0, 1) == 0 ? true : false;
+//			int word = getRandomInteger(1, 10);
+//			int start = getRandomInteger(1, 40);
+//			String words = "LOL";
+//			adapter.add(new OneComment(left, words));
+//		}
 	}
 
 	private static int getRandomInteger(int aStart, int aEnd) {
@@ -215,11 +217,14 @@ public class ThreadActivity extends Activity {
 	        
 	        case R.id.mapbutton:
 	        	Intent i = new Intent(getApplicationContext(), MapDisplayActivity.class);
+	        	i.putExtra("poster", poster);
+	        	i.putExtra("message", message);
 	        	i.putExtra("lat", latitudeE6);
 	        	i.putExtra("long", longitudeE6);
 	        	startActivity(i);
 	        
 	        default:
+	        	finish();
 	            return super.onOptionsItemSelected(item);
 	    }
 
