@@ -9,9 +9,11 @@ public class UserInfoProvider {
 
 	//Singleton class to provide information to all activities.
 	static String tag = "UserInfoProvider";
-	String userName;
-	String userId;
-	Bitmap fbAvatarBitmap;
+	private String userName;
+	private String userId;
+	private String imageURL;
+	private Bitmap fbAvatarBitmap;
+	
 	int  LatE6;
 	int  LonE6;
 	
@@ -33,10 +35,12 @@ public class UserInfoProvider {
 	
 	public void setUserName(String userName) {
 		this.userName = userName;
+		Log.i(tag, "Setting new instance userName: "+ userName);
 	}
 	
 	public void setUserId(String userId) {
 		this.userId = userId;
+		Log.i(tag, "Setting new userId: "+ userId);
 	}
 	
 	public String getUserName(){
@@ -67,11 +71,25 @@ public class UserInfoProvider {
 		this.LatE6 = (int) (Latitude * 1000000);
 	}
 	
+	public void setLongitude(Double Latitude){
+		this.LonE6 = (int) (Latitude * 1000000);
+	}
+	
 	public Double getLatitude(){
 		return LatE6/1000000.0;
 	}
 	public Double getLongitude(){
 		return LonE6/1000000.0;
+	}
+
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 }
 	

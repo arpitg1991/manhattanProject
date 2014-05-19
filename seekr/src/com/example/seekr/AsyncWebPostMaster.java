@@ -366,8 +366,6 @@ public class AsyncWebPostMaster extends AsyncTask {
 			else if (query.equals(search_data)){
 				
 				String searchText = params[1].toString();
-				//String lat = params[1].toString();
-				//String lon = params[2].toString();
 				Log.i(tag, "Searching for text "+searchText);
 				response = new customResponse(query, searchData(searchText, null, null));
 				Log.i(tag, "loaded new response" + response.responseBody);
@@ -475,6 +473,7 @@ public class AsyncWebPostMaster extends AsyncTask {
 					EventItem new_comment = new EventItem (json);
 					Log.i(tag, "Trying to add a view to EventList");
 					PanoramioItem item = new_comment.getPanoramioItem();
+					Log.i(tag, "item generated"+item);
 					this.img_mgr.add(item);
 					Log.i(tag, "View added");
 					}

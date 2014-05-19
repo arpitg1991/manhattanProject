@@ -99,12 +99,18 @@ public class PanoramioItem implements Parcelable {
         return mOwnerUrl;
     }
     
+
+    
     public String getPostId(){
     	return mOwnerUrl;
     }
     
     public String getPhotoUrl() {
         return mPhotoUrl;
+    }
+    
+    public String getUserName(){
+    	return mPhotoUrl;
     }
 
     public static final Parcelable.Creator<PanoramioItem> CREATOR =

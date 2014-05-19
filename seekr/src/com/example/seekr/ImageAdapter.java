@@ -147,7 +147,7 @@ public class ImageAdapter extends BaseAdapter {
         t.setText(s.getTitle());
         t.setTextColor(Color.WHITE);
         t = (TextView) view.findViewById(R.id.owner);
-        t.setText(s.getOwner());
+        t.setText(s.getUserName());
         t.setTextColor(Color.WHITE);
         return view;
     }

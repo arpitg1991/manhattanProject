@@ -1803,6 +1803,7 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f080013;
         public static final int copyright=0x7f080053;
         public static final int edit_message=0x7f080055;
+        public static final int enter_location=0x7f080058;
         public static final int expires_in=0x7f080056;
         public static final int get_started=0x7f080044;
         public static final int go=0x7f08004b;

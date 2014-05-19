@@ -1,9 +1,12 @@
 package com.example.seekr;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -27,6 +30,9 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -46,6 +52,10 @@ public class MainActivity extends FragmentActivity {
 	//	private static final int FRAGMENT_COUNT = SELECTION +1;
 	private MenuItem settings;
 	private Session session;
+
+	private String USER_ID;
+	private String USER_NAME;
+	private Bitmap USER_IMAGE;
 
 	private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
 
@@ -222,7 +232,7 @@ public class MainActivity extends FragmentActivity {
 				// callback after Graph API response with user object
 
 				@Override
-				public void onCompleted(GraphUser user,
+				public void onCompleted(final GraphUser user,
 						Response response) {
 					System.out.println("gETTING is null?");
 					System.out.println(user == null);
@@ -234,33 +244,64 @@ public class MainActivity extends FragmentActivity {
 						
 						UserInfoProvider info = UserInfoProvider.getInstance();
 						// USER ID
-						String USER_ID = user.getId();
-						info.setUserId(USER_ID);
+						USER_ID = user.getId();
 
 						// USER NAME
-						String NAME_OF_USER = user.getName();
-						info.setUserName(NAME_OF_USER);
-						// DISPLAY IMAGE
-						URL fbAvatarUrl = null;
-						Bitmap fbAvatarBitmap = null;
-//						try {
-//							fbAvatarUrl = new URL("http://graph.facebook.com/" + USER_ID + "/picture");
-//							fbAvatarBitmap = BitmapFactory.decodeStream(fbAvatarUrl.openConnection().getInputStream());
-//						} catch (MalformedURLException e) {
-//							e.printStackTrace();
-//						} catch (IOException e) {
-//							e.printStackTrace();
-//						}
+						USER_NAME = user.getName();
 						
-						ByteArrayOutputStream stream = new ByteArrayOutputStream();
-						info.setImageBitmap(fbAvatarBitmap);
-//						fbAvatarBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//						byte[] byteArray = stream.toByteArray();
+						UserInfoProvider userInfoInstance = UserInfoProvider.getInstance();
+						userInfoInstance.setUserName(USER_NAME);
+						userInfoInstance.setUserId(USER_ID);
+						
+						AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>(){
+							protected Bitmap doInBackground(Void... params) {
+								Bitmap bm = null;
+								try {
+									URL fbAvatarUrl = new URL("http://graph.facebook.com/"+ USER_ID +"/picture");
+									URLConnection conn = fbAvatarUrl.openConnection();
+									conn.setUseCaches(true);
+									conn.connect(); 
+									InputStream is = conn.getInputStream(); 
+									BufferedInputStream bis = new BufferedInputStream(is);
+									bm = BitmapFactory.decodeStream(bis);
+									bis.close();
+									is.close();
+								}
+							    catch (MalformedURLException e) {
+									e.printStackTrace();
+								} 
+							    catch (IOException e) { 
+									e.printStackTrace(); 
+								}
+								return bm;
+							}
+
+							protected void onPostExecute(Bitmap bm){
+								USER_IMAGE = bm;
+
+								System.out.println("++++++++++++++++++++++++++++++++++++++");
+								System.out.println("USERIMAGE");
+								if (bm == null) {
+									System.out.println("NULL!");
+								}
+								else {
+									System.out.println(bm.describeContents());
+									System.out.println(bm.getHeight());
+								}
+							}
+						};
+						t.execute();
+
+
+					} else if (response.getError() != null) {
+						System.out.println("PROFILE PIC ERROR");
 					}
 				}
 			});
 
 			Request.executeBatchAsync(request);
+
+
 
 			startActivity(intent);
 		} else {

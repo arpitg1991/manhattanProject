@@ -164,24 +164,24 @@ public class ImageList extends ListActivity {
         tempAdapter.listView = listView;
         setListAdapter(tempAdapter);
         
-		Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.anon);
-		UserInfoProvider info = UserInfoProvider.getInstance();
-		info.setImageBitmap(bm);
-		byte[] imageBytes= info.getImageAsByteArray();
-		
-		String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-		
-		Log.i(tag, "String representation:\n"+imageString);
-		byte[] decodedArray = Base64.decode(imageString, Base64.DEFAULT);
-		Bitmap bm2 = BitmapFactory.decodeByteArray(decodedArray, 0, decodedArray.length);
-		Log.i(tag, "Comparing image and image after decoding"+ imageBytes.equals(decodedArray));
-        //listView.setBackground();
-        actionBar.setIcon(new BitmapDrawable(getResources(),bm2));
-        AsyncWebPostMaster awp = new AsyncWebPostMaster(userId, getApplicationContext());
-        awp.execute(awp.new_post, "anon", "0","0", "100", imageString);
+//		Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.anon);
+//		UserInfoProvider info = UserInfoProvider.getInstance();
+//		info.setImageBitmap(bm);
+//		byte[] imageBytes= info.getImageAsByteArray();
+//		
+//		String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+//		
+//		Log.i(tag, "String representation:\n"+imageString);
+//		byte[] decodedArray = Base64.decode(imageString, Base64.DEFAULT);
+//		Bitmap bm2 = BitmapFactory.decodeByteArray(decodedArray, 0, decodedArray.length);
+//		Log.i(tag, "Comparing image and image after decoding"+ imageBytes.equals(decodedArray));
+//        //listView.setBackground();
+//        actionBar.setIcon(new BitmapDrawable(getResources(),bm2));
+//        AsyncWebPostMaster awp = new AsyncWebPostMaster(userId, getApplicationContext());
+//        awp.execute(awp.new_post, "anon", "0","0", "100", imageString);
 
         
-        Log.i(tag, "anon image sent");
+//        Log.i(tag, "anon image sent");
         
     }
     

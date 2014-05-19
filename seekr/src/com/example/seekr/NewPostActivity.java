@@ -22,6 +22,7 @@ public class NewPostActivity extends FragmentActivity {
 	EditText eventAddress;
 	Button postButton;
 	String userId; 
+	String userName = UserInfoProvider.getInstance().getUserName();
 	int LatE6;
 	int LonE6;
 	float E6 = ( float ) 1000000.0;
@@ -67,7 +68,7 @@ public class NewPostActivity extends FragmentActivity {
 						}
 						catch (Exception e){
 							Toast.makeText(getApplicationContext(), "Entered value is not an integer: "+ expiresIn.getText().toString() +"\nPlease send again" , Toast.LENGTH_SHORT).show();
-							Log.e(tag, "Value entered in expiresIn is not a string");
+							Log.e(tag, "Value e ntered in expiresIn is not a string");
 						}
 					}	
 

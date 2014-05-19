@@ -20,6 +20,7 @@ public class EventItem {
 
 	String tag = "EventItem";
 	String userId;
+	String userName;
 	String expireTime;
 	String catId;
 	String text;
@@ -46,6 +47,10 @@ public class EventItem {
 			text = (String) json.get("text");
 			userId = json.getString("userId");
 			_id  = (String) json.get("_id");
+			
+			try{
+			userName = json.getString("userName");
+			} catch(Exception e) { userName = null; } 
 			JSONObject location = (JSONObject) json.get("location");
 			location_type = location.getString("type");
 			JSONArray coordArray = (JSONArray) location.get("coordinates");
@@ -87,7 +92,7 @@ public class EventItem {
         t.setText(this.text);
         t.setTextColor(Color.WHITE);
         t = (TextView) view.findViewById(R.id.owner);
-        t.setText("userId");
+        t.setText(this.userName);
         return view;
 
 	}
@@ -95,7 +100,7 @@ public class EventItem {
 	public PanoramioItem getPanoramioItem()
 	{
 		int E6 = 1000000;
-		PanoramioItem pItem = new PanoramioItem(100, null, null, Lat.intValue(), Long.intValue(), text, userId, _id, "junk_text");
+		PanoramioItem pItem = new PanoramioItem(100, null, null, Lat.intValue(), Long.intValue(), text, userId, _id, userName);
 		return pItem;
 	}
 
