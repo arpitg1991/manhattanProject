@@ -172,6 +172,10 @@ public class NewPostActivity extends FragmentActivity {
 							String locNameItem = oneObject.getString("name");							
 							String locAddressItem = locationObject.getString("address");
 							String locStreetItem = locationObject.getString("crossStreet");
+							
+							// Getting Lat/Lon of places
+							Double loc_lat = locationObject.getDouble("lat");
+							Double loc_lon = locationObject.getDouble("lon");
 
 							placeName = locNameItem;
 							placeAddress = locAddressItem;
