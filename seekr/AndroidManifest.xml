@@ -91,6 +91,9 @@
 
         <uses-library android:name="com.google.android.maps" />
 
+        <activity android:name="com.example.seekr.AndroidListViewActivity"
+                  android:label="Android List View">
+        </activity>
         
         <activity
             android:name="com.example.seekr.ThreadActivity"

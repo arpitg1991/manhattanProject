@@ -62,7 +62,7 @@ public class NewPostActivity extends FragmentActivity {
 	PopupWindow popupWindowLocations;
 	Button buttonShowDropDown;
 
-	List<String> addressList = new ArrayList<String>();
+	ArrayList<String> addressList = new ArrayList<String>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -184,8 +184,10 @@ public class NewPostActivity extends FragmentActivity {
 							Log.e("JSON", "JSON Error");
 						}
 					}
-					
-					eventAddress.setText(addressList.get(0));
+
+					Intent i = new Intent(getApplicationContext(), AndroidListViewActivity.class);
+					i.putStringArrayListExtra("listofevents", addressList);
+					startActivityForResult(i, 1);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -201,6 +203,15 @@ public class NewPostActivity extends FragmentActivity {
 			result += line;
 		inputStream.close();
 		return result;
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 1) {
+			if(resultCode == RESULT_OK){
+				String result = data.getStringExtra("selectedLocation");
+				eventAddress.setText(result);
+			}
+		}
 	}
 
 	public static String GET(String url){
