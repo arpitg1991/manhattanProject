@@ -174,14 +174,17 @@ public class NewPostActivity extends FragmentActivity {
 							String locStreetItem = locationObject.getString("crossStreet");
 							
 							// Getting Lat/Lon of places
-							Double loc_lat = locationObject.getDouble("lat");
-							Double loc_lon = locationObject.getDouble("lon");
+							double loc_lat = locationObject.getDouble("lat");
+							double loc_lng = locationObject.getDouble("lng");
+							System.out.println(loc_lat);
+							System.out.println(loc_lng);
 
 							placeName = locNameItem;
 							placeAddress = locAddressItem;
 							placeCrossStreet = locStreetItem;
 
 							String place = placeName + ", " + placeAddress + " " + placeCrossStreet;
+							System.out.println(place);
 
 							addressList.add(place);
 						} catch (JSONException e) {
