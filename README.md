@@ -15,13 +15,13 @@ Vipul Raheja - <b>vipulraheja</b>
 
 <b>TODOs</b>
 ------------------------
-- Arpit : Integrate Twitter Datamining code into Seekr
-- Arpit : Get image from facebook 
-- 
+- Vipul, Arpit : Integrate Twitter Datamining code into Seekr
+- Arpit : Get image from facebook
 - Anjishnu : add categories and open search.
-- Vipul : Maps!!
+
 DONE -
 --------------
+- Vipul : Maps!! --> Replaced by the Awesome Place Search Foursquare API
 - Anjishnu: Integrate makeNewPost with API
 - Add makePost activity (Anjishnu) 
 - Add API for getComments?postId=abcXYZ (Arpit)
@@ -31,12 +31,9 @@ DONE -
 - Vipul : Get UserID/UserName/Thumbnail from FB
 - Vipul : Convert video to GIF to make it mobile friendly
 - Vipul : Integrate Twitter Datamining code into Seekr
-- Vipul : Integrate Twitter Datamining code into Seekr
 - Anjishnu: - Integrate comments/chat with API
 - Anjishnu: Overlay Panoramio useless map with cool WebView
 - Arpit : Remove Posts if X no. of ppl commented
-
-
 
 
 <b>APIs</b>
@@ -108,5 +105,3 @@ Feed ->
 <br>3) Post as anonymous 
 
 <br>
-
-
