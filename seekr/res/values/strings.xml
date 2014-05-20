@@ -22,14 +22,10 @@
     <string name="copyright">Photos provided by Panoramio are under the copyright of their owners.</string>
     <string name="title_activity_map">MapActivity</string>	
     <string name="edit_message">Describe your event here</string>
-    <string name="expires_in">Expires in? (Minutes)</string>
-    <string name="button_send">Create</string>
-    <string name="enter_location"> Location? (Current)</string> 
-    
-    <string name="action_culture">Culture</string>
-    <string name="action_sports">Sports</string>
-    <string name="action_food">Food</string>
-    <string name="action_alerts">Alerts</string>
-    <string name="action_music">Music</string>
+    <string name="expires_in">Enter expiry time</string>
+    <string name="enter_location">Enter location</string>
+    <string name="search_location">Search Location</string>
+    <string name="button_send">Create Event</string>
+     
     
 </resources>

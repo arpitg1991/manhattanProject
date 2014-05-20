@@ -50,14 +50,18 @@ public class NewPostActivity extends FragmentActivity {
 	AsyncWebPostMaster postman;
 	EditText edit_text;
 	EditText expiresIn;
+	
 	EditText eventAddress;
+	Button searchEvent;
+	
 	Button postButton;
+	
 	String userId; 
 	int LatE6;
 	int LonE6;
 	float E6 = ( float ) 1000000.0;
 	int requestCode;
-	
+
 	double loc_lat;
 	double loc_lng;
 
@@ -82,29 +86,33 @@ public class NewPostActivity extends FragmentActivity {
 		expiresIn = (EditText) findViewById(R.id.expires_in);
 
 		eventAddress = (EditText) findViewById(R.id.event_location);
-		eventAddress.setOnKeyListener(new OnKeyListener() {
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				// If the event is a key-down event on the "enter" button
-				if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-						(keyCode == KeyEvent.KEYCODE_ENTER)) {
-					// Perform action on key press
-					addressList.clear();
-					String searchLoc = eventAddress.getText().toString();
-					System.out.println(searchLoc);
-					new HttpAsyncTask().execute("https://api.foursquare.com/v2/venues/search?client_id=NPYFXJLBUOCYQUXZOR4VUCRWQ5X3YTHVRXY5ULLPCSN1TCIE&client_secret=A0DK4XHO34SDN0WZGLV4JGYVJ3EFQSZX3ODJNPA5NWDDEQ4M&v=20130815%20&ll=40.7,-74%20&query=" + searchLoc.replaceAll("\\s+", "%20"));					
-					return true;
-				}
-				return false;
-			}
-		});
-
-		//		.setOnClickListener(new OnClickListener() {
-		//			@Override
-		//			public void onClick(View v) {
-		//				addressList.clear();
-		//				new HttpAsyncTask().execute("https://api.foursquare.com/v2/venues/search?client_id=NPYFXJLBUOCYQUXZOR4VUCRWQ5X3YTHVRXY5ULLPCSN1TCIE&client_secret=A0DK4XHO34SDN0WZGLV4JGYVJ3EFQSZX3ODJNPA5NWDDEQ4M&v=20130815%20&ll=40.7,-74%20&query=subsconscious");
-		//			}			
-		//		});
+//		eventAddress.setOnKeyListener(new OnKeyListener() {
+//			public boolean onKey(View v, int keyCode, KeyEvent event) {
+//				// If the event is a key-down event on the "enter" button
+//				if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+//						(keyCode == KeyEvent.KEYCODE_ENTER)) {
+//					// Perform action on key press
+//					addressList.clear();
+//					String searchLoc = eventAddress.getText().toString();
+//					System.out.println(searchLoc);
+//					new HttpAsyncTask().execute("https://api.foursquare.com/v2/venues/search?client_id=NPYFXJLBUOCYQUXZOR4VUCRWQ5X3YTHVRXY5ULLPCSN1TCIE&client_secret=A0DK4XHO34SDN0WZGLV4JGYVJ3EFQSZX3ODJNPA5NWDDEQ4M&v=20130815%20&ll=40.7,-74%20&query=" + searchLoc.replaceAll("\\s+", "%20"));					
+//					return true;
+//				}
+//				return false;
+//			}
+//		});
+		
+		searchEvent = (Button) findViewById(R.id.search_location);
+		searchEvent.setOnClickListener(
+				new OnClickListener() {					
+					@Override
+					public void onClick(View v) {
+						addressList.clear();
+						String searchLoc = eventAddress.getText().toString();
+						System.out.println(searchLoc);
+						new HttpAsyncTask().execute("https://api.foursquare.com/v2/venues/search?client_id=NPYFXJLBUOCYQUXZOR4VUCRWQ5X3YTHVRXY5ULLPCSN1TCIE&client_secret=A0DK4XHO34SDN0WZGLV4JGYVJ3EFQSZX3ODJNPA5NWDDEQ4M&v=20130815%20&ll=40.7,-74%20&query=" + searchLoc.replaceAll("\\s+", "%20"));
+					}
+				});
 
 		postButton = (Button) findViewById(R.id.button_send);
 		postButton.setOnClickListener( 
@@ -128,12 +136,12 @@ public class NewPostActivity extends FragmentActivity {
 
 	public void sendPost()
 	{
-//		String lat = new Float(LatE6/E6).toString();
-//		String lon = new Float(LonE6/E6).toString();
-		
+		//		String lat = new Float(LatE6/E6).toString();
+		//		String lon = new Float(LonE6/E6).toString();
+
 		String lat = new Float(loc_lat).toString();
 		String lon = new Float(loc_lng).toString();
-		
+
 		String exp = expiresIn.getText().toString();
 
 		Log.i(tag, "Sending post " + edit_text.getText().toString() + " " + lat + " " + lon + " "+exp);
@@ -179,7 +187,7 @@ public class NewPostActivity extends FragmentActivity {
 							String locNameItem = oneObject.getString("name");							
 							String locAddressItem = locationObject.getString("address");
 							String locStreetItem = locationObject.getString("crossStreet");
-							
+
 							// Getting Lat/Lon of places
 							loc_lat = locationObject.getDouble("lat");
 							loc_lng = locationObject.getDouble("lng");
