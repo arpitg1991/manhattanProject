@@ -52,11 +52,12 @@ Get Event : /getPost?lat=-42&lon=70 received JSON
 
 CATEGORIES of EVENTS : 
 
-- #Food
-- #Alerts
-- #Sports
-- #Music
-- #Culture
+SPORTS
+FOOD
+NEWS
+MUSIC
+CULTURE
+
 
 Tech Discussion-
 -----------------------
