@@ -57,6 +57,9 @@ public class NewPostActivity extends FragmentActivity {
 	int LonE6;
 	float E6 = ( float ) 1000000.0;
 	int requestCode;
+	
+	double loc_lat;
+	double loc_lng;
 
 	String popUpContents[];
 	PopupWindow popupWindowLocations;
@@ -125,8 +128,12 @@ public class NewPostActivity extends FragmentActivity {
 
 	public void sendPost()
 	{
-		String lat = new Float(LatE6/E6).toString();
-		String lon = new Float(LonE6/E6).toString();
+//		String lat = new Float(LatE6/E6).toString();
+//		String lon = new Float(LonE6/E6).toString();
+		
+		String lat = new Float(loc_lat).toString();
+		String lon = new Float(loc_lng).toString();
+		
 		String exp = expiresIn.getText().toString();
 
 		Log.i(tag, "Sending post " + edit_text.getText().toString() + " " + lat + " " + lon + " "+exp);
@@ -174,8 +181,8 @@ public class NewPostActivity extends FragmentActivity {
 							String locStreetItem = locationObject.getString("crossStreet");
 							
 							// Getting Lat/Lon of places
-							double loc_lat = locationObject.getDouble("lat");
-							double loc_lng = locationObject.getDouble("lng");
+							loc_lat = locationObject.getDouble("lat");
+							loc_lng = locationObject.getDouble("lng");
 							System.out.println(loc_lat);
 							System.out.println(loc_lng);
 
@@ -242,7 +249,6 @@ public class NewPostActivity extends FragmentActivity {
 		} catch (Exception e) {
 			Log.d("InputStream", e.getLocalizedMessage());
 		}
-
 		return result;
 	}
 }
