@@ -241,18 +241,13 @@ public class MainActivity extends FragmentActivity {
 								+ user.getUsername() + ","
 								+ user.getId() + "," + user.getLink()
 								+ "," + user.getFirstName()+ user.asMap().get("email"));
-						
-						UserInfoProvider info = UserInfoProvider.getInstance();
+
 						// USER ID
 						USER_ID = user.getId();
 
 						// USER NAME
 						USER_NAME = user.getName();
-						
-						UserInfoProvider userInfoInstance = UserInfoProvider.getInstance();
-						userInfoInstance.setUserName(USER_NAME);
-						userInfoInstance.setUserId(USER_ID);
-						
+
 						AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>(){
 							protected Bitmap doInBackground(Void... params) {
 								Bitmap bm = null;
@@ -301,7 +296,10 @@ public class MainActivity extends FragmentActivity {
 
 			Request.executeBatchAsync(request);
 
-
+			UserInfoProvider userInfoInstance = UserInfoProvider.getInstance();
+			userInfoInstance.setImageBitmap(USER_IMAGE);
+			userInfoInstance.setUserName(USER_NAME);
+			userInfoInstance.setUserId(USER_ID);
 
 			startActivity(intent);
 		} else {

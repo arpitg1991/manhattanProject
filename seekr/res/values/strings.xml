@@ -25,6 +25,7 @@
     <string name="expires_in">Enter expiry time</string>
     <string name="enter_location">Enter location</string>
     <string name="search_location">Search Location</string>
+    <string name="start_seeking">Seek!</string>
     <string name="button_send">Create Event</string>
      
     
