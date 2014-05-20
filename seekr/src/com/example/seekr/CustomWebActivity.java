@@ -37,6 +37,10 @@ public class CustomWebActivity extends Activity{
 		
 		ActionBar actionBar = getActionBar();
 		actionBar.setTitle("Seekr");
+		
+		actionBar.setIcon(null);
+		actionBar.setLogo(null);
+		
 		actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 		
 

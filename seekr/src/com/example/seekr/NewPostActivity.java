@@ -93,7 +93,7 @@ public class NewPostActivity extends FragmentActivity {
 		hrMinSec = (Spinner) findViewById(R.id.planets_spinner);
 		
         ArrayAdapter<String> adapter;
-        String timeDuration[] = { "Days", "Hours", "Minutes" };
+        String timeDuration[] = {  "Minutes","Days", "Hours" };
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, timeDuration);
         hrMinSec.setAdapter(adapter);
 
@@ -155,15 +155,23 @@ public class NewPostActivity extends FragmentActivity {
 		String lon = new Float(loc_lng).toString();
 		
 		int duration = (int) hrMinSec.getSelectedItemId(); 		
-		int expiry = Integer.parseInt(expiresIn.getText().toString());
+		
+		int expiry = 1800;
+		if(!expiresIn.getText().toString().equals(""))
+		{
+		expiry = Integer.parseInt(expiresIn.getText().toString());
 		
 		if (duration == 0)
-			expiry *= 86400;
+			//expiry *= 86400;
+			expiry *= 60;
+		
 		else if (duration == 1)
 			expiry *= 3600;	
 		else
-			expiry *= 60;
-
+			//expiry *= 60;
+			expiry *= 86400;
+		}
+		
 		String exp = String.valueOf(expiry);
 		
 		Log.i(tag, "Sending post " + edit_text.getText().toString() + " " + lat + " " + lon + " "+exp);
