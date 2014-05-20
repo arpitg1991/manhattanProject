@@ -3,40 +3,86 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:weightSum="1.0"
-    >
-   
-    <EditText android:id="@+id/edit_message"       
-        android:layout_width="wrap_content"
-        android:hint="@string/edit_message" 
-        android:layout_height="100dp"
+    android:paddingTop="20dp"
+    android:weightSum="1.0" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/edit_message"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:hint="@string/edit_message" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        />
-    
-    <EditText android:id="@+id/expires_in"
-        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
+
+        <EditText
+            android:id="@+id/expires_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/expires_in"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp" />
+
+        <Spinner
+            android:id="@+id/planets_spinner"
+            android:layout_width="83dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/expires_in" 
-        android:layout_gravity="center"
-        android:gravity="center"
-        />
-    
-     <EditText android:id="@+id/event_location"
-        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1.0" >
+
+        <EditText
+            android:id="@+id/event_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:hint="@string/enter_location"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp" />
+
+        <Button
+            android:id="@+id/search_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:onClick="sendLocation"
+            android:text="@string/search_location" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_location" 
-        android:layout_gravity="center"
-        android:gravity="center"
-        />
-   
-    <Button android:id="@+id/button_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_send"
-        android:onClick="sendMessage" 
-        android:layout_gravity="center"
-        />
-    
-    
+        android:orientation="vertical"
+        android:paddingTop="40dp" >
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:onClick="sendMessage"
+            android:text="@string/button_send" />
+    </LinearLayout>
+
 </LinearLayout>

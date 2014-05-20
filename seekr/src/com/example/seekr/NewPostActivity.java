@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image.Plane;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,9 +40,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class NewPostActivity extends FragmentActivity {
@@ -49,14 +52,23 @@ public class NewPostActivity extends FragmentActivity {
 	String tag = "NewPostActivity";
 	AsyncWebPostMaster postman;
 	EditText edit_text;
+	
 	EditText expiresIn;
+	Spinner hrMinSec;
+	
 	EditText eventAddress;
+	Button searchEvent;
+	
 	Button postButton;
+	
 	String userId; 
 	int LatE6;
 	int LonE6;
 	float E6 = ( float ) 1000000.0;
 	int requestCode;
+
+	double loc_lat;
+	double loc_lng;
 
 	String popUpContents[];
 	PopupWindow popupWindowLocations;
@@ -76,32 +88,43 @@ public class NewPostActivity extends FragmentActivity {
 		LonE6 = intent.getIntExtra("LongitudeE6",0);
 		postman = new AsyncWebPostMaster(userId, getApplicationContext());
 		edit_text = (EditText) findViewById(R.id.edit_message);
+		
 		expiresIn = (EditText) findViewById(R.id.expires_in);
+		hrMinSec = (Spinner) findViewById(R.id.planets_spinner);
+		
+        ArrayAdapter<String> adapter;
+        String timeDuration[] = { "Days", "Hours", "Minutes" };
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, timeDuration);
+        hrMinSec.setAdapter(adapter);
 
 		eventAddress = (EditText) findViewById(R.id.event_location);
-		eventAddress.setOnKeyListener(new OnKeyListener() {
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				// If the event is a key-down event on the "enter" button
-				if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-						(keyCode == KeyEvent.KEYCODE_ENTER)) {
-					// Perform action on key press
-					addressList.clear();
-					String searchLoc = eventAddress.getText().toString();
-					System.out.println(searchLoc);
-					new HttpAsyncTask().execute("https://api.foursquare.com/v2/venues/search?client_id=NPYFXJLBUOCYQUXZOR4VUCRWQ5X3YTHVRXY5ULLPCSN1TCIE&client_secret=A0DK4XHO34SDN0WZGLV4JGYVJ3EFQSZX3ODJNPA5NWDDEQ4M&v=20130815%20&ll=40.7,-74%20&query=" + searchLoc.replaceAll("\\s+", "%20"));					
-					return true;
-				}
-				return false;
-			}
-		});
-
-		//		.setOnClickListener(new OnClickListener() {
-		//			@Override
-		//			public void onClick(View v) {
-		//				addressList.clear();
-		//				new HttpAsyncTask().execute("https://api.foursquare.com/v2/venues/search?client_id=NPYFXJLBUOCYQUXZOR4VUCRWQ5X3YTHVRXY5ULLPCSN1TCIE&client_secret=A0DK4XHO34SDN0WZGLV4JGYVJ3EFQSZX3ODJNPA5NWDDEQ4M&v=20130815%20&ll=40.7,-74%20&query=subsconscious");
-		//			}			
-		//		});
+//		eventAddress.setOnKeyListener(new OnKeyListener() {
+//			public boolean onKey(View v, int keyCode, KeyEvent event) {
+//				// If the event is a key-down event on the "enter" button
+//				if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+//						(keyCode == KeyEvent.KEYCODE_ENTER)) {
+//					// Perform action on key press
+//					addressList.clear();
+//					String searchLoc = eventAddress.getText().toString();
+//					System.out.println(searchLoc);
+//					new HttpAsyncTask().execute("https://api.foursquare.com/v2/venues/search?client_id=NPYFXJLBUOCYQUXZOR4VUCRWQ5X3YTHVRXY5ULLPCSN1TCIE&client_secret=A0DK4XHO34SDN0WZGLV4JGYVJ3EFQSZX3ODJNPA5NWDDEQ4M&v=20130815%20&ll=40.7,-74%20&query=" + searchLoc.replaceAll("\\s+", "%20"));					
+//					return true;
+//				}
+//				return false;
+//			}
+//		});
+		
+		searchEvent = (Button) findViewById(R.id.search_location);
+		searchEvent.setOnClickListener(
+				new OnClickListener() {					
+					@Override
+					public void onClick(View v) {
+						addressList.clear();
+						String searchLoc = eventAddress.getText().toString();
+						System.out.println(searchLoc);
+						new HttpAsyncTask().execute("https://api.foursquare.com/v2/venues/search?client_id=NPYFXJLBUOCYQUXZOR4VUCRWQ5X3YTHVRXY5ULLPCSN1TCIE&client_secret=A0DK4XHO34SDN0WZGLV4JGYVJ3EFQSZX3ODJNPA5NWDDEQ4M&v=20130815%20&ll=40.7,-74%20&query=" + searchLoc.replaceAll("\\s+", "%20"));
+					}
+				});
 
 		postButton = (Button) findViewById(R.id.button_send);
 		postButton.setOnClickListener( 
@@ -125,10 +148,24 @@ public class NewPostActivity extends FragmentActivity {
 
 	public void sendPost()
 	{
-		String lat = new Float(LatE6/E6).toString();
-		String lon = new Float(LonE6/E6).toString();
-		String exp = expiresIn.getText().toString();
+		//		String lat = new Float(LatE6/E6).toString();
+		//		String lon = new Float(LonE6/E6).toString();
 
+		String lat = new Float(loc_lat).toString();
+		String lon = new Float(loc_lng).toString();
+		
+		int duration = (int) hrMinSec.getSelectedItemId(); 		
+		int expiry = Integer.parseInt(expiresIn.getText().toString());
+		
+		if (duration == 0)
+			expiry *= 86400;
+		else if (duration == 1)
+			expiry *= 3600;	
+		else
+			expiry *= 60;
+
+		String exp = String.valueOf(expiry);
+		
 		Log.i(tag, "Sending post " + edit_text.getText().toString() + " " + lat + " " + lon + " "+exp);
 		postman.execute(postman.new_post, edit_text.getText().toString(), lat, lon, exp);
 		Toast.makeText(getApplicationContext(), "Request sent to generate new event" , Toast.LENGTH_LONG).show();
@@ -172,10 +209,10 @@ public class NewPostActivity extends FragmentActivity {
 							String locNameItem = oneObject.getString("name");							
 							String locAddressItem = locationObject.getString("address");
 							String locStreetItem = locationObject.getString("crossStreet");
-							
+
 							// Getting Lat/Lon of places
-							double loc_lat = locationObject.getDouble("lat");
-							double loc_lng = locationObject.getDouble("lng");
+							loc_lat = locationObject.getDouble("lat");
+							loc_lng = locationObject.getDouble("lng");
 							System.out.println(loc_lat);
 							System.out.println(loc_lng);
 
@@ -242,7 +279,6 @@ public class NewPostActivity extends FragmentActivity {
 		} catch (Exception e) {
 			Log.d("InputStream", e.getLocalizedMessage());
 		}
-
 		return result;
 	}
 }

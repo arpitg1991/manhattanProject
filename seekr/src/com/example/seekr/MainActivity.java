@@ -241,18 +241,16 @@ public class MainActivity extends FragmentActivity {
 								+ user.getUsername() + ","
 								+ user.getId() + "," + user.getLink()
 								+ "," + user.getFirstName()+ user.asMap().get("email"));
-						
-						UserInfoProvider info = UserInfoProvider.getInstance();
+
+						UserInfoProvider spy = UserInfoProvider.getInstance();
 						// USER ID
 						USER_ID = user.getId();
-
+						spy.setUserId(USER_ID);
 						// USER NAME
 						USER_NAME = user.getName();
-						
-						UserInfoProvider userInfoInstance = UserInfoProvider.getInstance();
-						userInfoInstance.setUserName(USER_NAME);
-						userInfoInstance.setUserId(USER_ID);
-						
+						spy.setUserName(USER_NAME);
+
+
 						AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>(){
 							protected Bitmap doInBackground(Void... params) {
 								Bitmap bm = null;
@@ -303,6 +301,7 @@ public class MainActivity extends FragmentActivity {
 
 
 
+			
 			startActivity(intent);
 		} else {
 			// otherwise present the splash screen

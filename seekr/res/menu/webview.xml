@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- Settings, should always be in the overflow -->
+    <item
+        android:id="@+id/start_seeking"
+        android:icon="@drawable/map_pin"
+        android:showAsAction="always"
+        android:title="@string/start_seeking"/>
+
+</menu>
