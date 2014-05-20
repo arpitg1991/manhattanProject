@@ -170,7 +170,7 @@ public class ThreadActivity extends Activity {
 	}
 	private void addItems() {
 
-		adapter.add(new OneComment(true, message, userId, userName));
+		adapter.add(new OneComment(true, message, postId, poster));
 
 //		for (int i = 0; i < 4; i++) {
 //			boolean left = getRandomInteger(0, 1) == 0 ? true : false;

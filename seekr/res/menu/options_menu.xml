@@ -3,7 +3,7 @@
     
     <item android:id="@+id/search"
 		  android:title="What are you looking for?"
-          android:icon="@drawable/ic_action_place"
+          android:icon="@drawable/ic_action_search"
           android:showAsAction="collapseActionView|ifRoom"
           android:actionViewClass="android.widget.SearchView" />
     
@@ -27,5 +27,12 @@
           android:showAsAction="never" />
     <item android:id="@+id/action_culture"
           android:title="@string/action_culture"
-          android:showAsAction="never" />    
+          android:showAsAction="never" />
+    <item android:id="@+id/action_offers"
+          android:title="@string/action_offers"
+          android:showAsAction="never" />
+    <item android:id="@+id/action_username"
+          android:title="@string/action_username"
+          android:showAsAction="never" />
+    
 </menu>

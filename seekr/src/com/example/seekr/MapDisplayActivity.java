@@ -47,17 +47,14 @@ public class MapDisplayActivity extends Activity {
        Location location = map.getMyLocation();
        
        Intent i = getIntent();
-       latitudeE6 	= i.getIntExtra("lat", Integer.MIN_VALUE);
-       longitudeE6  = i.getIntExtra("long", Integer.MIN_VALUE);
-       
-       latitude 	+=	latitudeE6;		
-       latitude/=1000000;
-       longitude	+=	longitudeE6; 	
-       longitude/=1000000;
+       latitude 	= i.getFloatExtra("lat", Integer.MIN_VALUE);
+       longitude  = i.getFloatExtra("long", Integer.MIN_VALUE);
+       Log.i("ItemAdapter", "lat" + latitudeE6 + "long"+ longitudeE6);
        
        Log.i(className, "Latitude :" + latitude.toString() + " Longitude :" + longitude.toString());
        sydney = new LatLng(latitude, longitude);
-       map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10));
+       map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15));
+       
        String poster  = i.getStringExtra("poster");
        String message = i.getStringExtra("message");
        Log.i("Map", "poster: "+poster + " message: "+message);

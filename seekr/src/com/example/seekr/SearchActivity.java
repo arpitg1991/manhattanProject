@@ -31,9 +31,11 @@ public class SearchActivity extends Activity {
             Log.i(this.getClass().getSimpleName(), "Reached SearchActivity - insert processing here");
             Toast.makeText(getApplicationContext(), "Search activated", Toast.LENGTH_LONG).show();
             
-            Intent searchIntent = new Intent(this, ImageList.class);
+            //Intent searchIntent = new Intent(this, ImageList.class);
+            //Intent searchIntent = new Intent(this, ItemListActivity.class);
             
-            Intent i = new Intent(this, ImageList.class);
+            //Intent i = new Intent(this, ImageList.class);
+            Intent i = new Intent(this, ItemListActivity.class);
             //Intent i = new Intent(this, MapDisplayActivity.class);
             i.putExtra(ImageList.SEARCH_SERVICE, query);
             //i.putExtra(ImageManager.LATITUDE_E6_EXTRA, latitudeE6);

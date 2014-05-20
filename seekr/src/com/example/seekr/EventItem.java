@@ -30,6 +30,7 @@ public class EventItem {
 	Double Lat;
 	Double Long;
 	String PostTime;
+	String userPic;
 	Integer likes;
 	JSONObject json;
 	
@@ -42,7 +43,15 @@ public class EventItem {
 		
 		try{
 			
-			expireTime=(String) json.get("expireTime");
+			try {
+			Long lexpireTime=(Long) json.get("expireTime");
+			expireTime = lexpireTime.toString();
+			} catch(Exception e) {
+			expireTime = "0";
+			}
+			
+			 
+					
 			catId = (String) json.get("catId");
 			text = (String) json.get("text");
 			userId = json.getString("userId");
@@ -51,6 +60,13 @@ public class EventItem {
 			try{
 			userName = json.getString("userName");
 			} catch(Exception e) { userName = null; } 
+			
+			try{
+			userPic = json.getString("userPic");
+			} 
+			catch(Exception e) { userPic = null; }
+			
+			
 			JSONObject location = (JSONObject) json.get("location");
 			location_type = location.getString("type");
 			JSONArray coordArray = (JSONArray) location.get("coordinates");
@@ -102,6 +118,21 @@ public class EventItem {
 		int E6 = 1000000;
 		PanoramioItem pItem = new PanoramioItem(100, null, null, Lat.intValue(), Long.intValue(), text, userId, _id, userName);
 		return pItem;
+	}
+	
+	public ItemRow getItemRow() {
+		ItemRow newRow = new ItemRow(this.userName, null);
+		
+		newRow.setExpiryTime(this.expireTime);
+		newRow.setLat(this.Lat);
+		newRow.setLong(this.Long);
+		newRow.setPostId(this._id);
+		newRow.setUserId(this.userId);
+		newRow.setText(this.text);
+		newRow.setUserPic(this.userPic);
+		
+		return newRow;
+	
 	}
 
 }

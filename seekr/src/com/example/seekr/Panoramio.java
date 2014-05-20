@@ -155,8 +155,8 @@ public class Panoramio extends MapActivity implements OnClickListener {
         
         Log.i(new Integer(latitudeE6).toString(), new Integer(longitudeE6).toString());
         
-        Intent i = new Intent(this, ImageList.class);
-        //Intent i = new Intent(this, MapDisplayActivity.class);
+        //Intent i = new Intent(this, ImageList.class);
+        Intent i = new Intent(this, ItemListActivity.class);
         i.putExtra(ImageManager.ZOOM_EXTRA, zoom);
         i.putExtra(ImageManager.LATITUDE_E6_EXTRA, latitudeE6);
         i.putExtra(ImageManager.LONGITUDE_E6_EXTRA, longitudeE6);

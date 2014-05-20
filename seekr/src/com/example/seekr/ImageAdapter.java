@@ -58,12 +58,7 @@ public class ImageAdapter extends BaseAdapter {
         	listView.setBackgroundColor(Color.BLACK);
 
         	
-//        	if (mImageManager.size()==2)
-//        	{PanoramioItem s = mImageManager.get(1);
-//        	Bitmap bitmap = s.getBitmap();
-//        	bitmap = fastblur(bitmap,4);
-//        	listView.setBackground(new android.graphics.drawable.BitmapDrawable(bitmap));
-//        	}
+
 
             notifyDataSetChanged();
         }
@@ -95,6 +90,8 @@ public class ImageAdapter extends BaseAdapter {
     public int getCount() {
         return mImageManager.size();
     }
+    
+    
 
     /**
      * Returns the image at a specified position

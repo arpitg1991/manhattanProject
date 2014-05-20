@@ -95,7 +95,7 @@ public class AsyncWebPostMaster extends AsyncTask {
     private ThreadArrayAdapter t_adapter;
     private ImageManager img_mgr;
     private Context myContext;
-    
+    private ItemAdapter myItems;
     
 	public AsyncWebPostMaster(String userId, Context context) {
 	    this.userId = userId;
@@ -236,7 +236,9 @@ public class AsyncWebPostMaster extends AsyncTask {
     public String createComment(String comment, String postId) throws Exception
     {
     	Log.i(tag,"Creating comment:"+userId) ; 
+    	
     	Map<String, String> post = new HashMap<String, String>();
+    	
     	String jsonString = gson.toJson(new CommentPOJO(postId,comment));
     	
     	Log.i(tag, "JSONSTRING:"+jsonString);
@@ -261,8 +263,8 @@ public class AsyncWebPostMaster extends AsyncTask {
     	
     	Log.i(tag, "Entered getData Call");
     	//Get data to populate the list
-    	if (this.img_mgr==null){    		
-    		Log.e(tag, "ImageAdapter not set: Not executing");
+    	if (this.img_mgr==null && this.myItems==null){    		
+    		Log.e(tag, "ImageAdapters not setup properly: Not executing");
     		return null;
     	}
     	    	
@@ -281,7 +283,7 @@ public class AsyncWebPostMaster extends AsyncTask {
     	
     	Log.i(tag, "Entered searchData Call");
     	//Get data to populate the list
-    	if (this.img_mgr==null){    		
+    	if (this.img_mgr==null && this.myItems==null){    		
     		Log.e(tag, "ImageAdapter not set: Not executing");
     		return null;
     	}
@@ -395,24 +397,6 @@ public class AsyncWebPostMaster extends AsyncTask {
 	{
 		
 		//Testbed
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		customResponse cres = (customResponse) response;
 		Log.i(tag,"onPostExecute: "+cres.responseType.equals(this.get_data));
 		 
@@ -481,9 +465,24 @@ public class AsyncWebPostMaster extends AsyncTask {
 					Log.i(tag, "JSONObject:"+json.toString());
 					EventItem new_comment = new EventItem (json);
 					Log.i(tag, "Trying to add a view to EventList");
-					PanoramioItem item = new_comment.getPanoramioItem();
-					Log.i(tag, "item generated"+item);
-					this.img_mgr.add(item);
+					
+					if (img_mgr!=null) {
+						
+						PanoramioItem item = new_comment.getPanoramioItem();
+						Log.i(tag, "item generated for image manager"+item);
+						this.img_mgr.add(item);
+						
+					}
+					
+					if (myItems!=null) {
+						
+						ItemRow newRow = new_comment.getItemRow();
+						Log.i(tag, "item generated for ItemAdapter");
+						myItems.addItemRow(newRow);
+					}
+					
+					ItemRow newRow = new_comment.getItemRow();
+					
 					Log.i(tag, "View added");
 					}
 				} 				
@@ -493,5 +492,13 @@ public class AsyncWebPostMaster extends AsyncTask {
 					Log.e(tag, "Somecrap" + e.getMessage());
 				}
 			}
-		} 
+		}
+
+	public ItemAdapter getMyItems() {
+		return myItems;
+	}
+
+	public void setMyItems(ItemAdapter myItems) {
+		this.myItems = myItems;
+	} 
 	}

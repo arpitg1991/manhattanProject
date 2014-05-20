@@ -31,5 +31,7 @@
     <string name="action_food">Food</string>
     <string name="action_alerts">Alerts</string>
     <string name="action_music">Music</string>
+    <string name="action_offers">Offers</string>
+    <string name="action_username">Filler</string>
     
 </resources>
