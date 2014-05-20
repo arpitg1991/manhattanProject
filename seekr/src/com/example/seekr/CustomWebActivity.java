@@ -2,10 +2,13 @@ package com.example.seekr;
 
 import com.google.android.gms.location.LocationClient;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -27,10 +30,16 @@ public class CustomWebActivity extends Activity{
 	static Location currentLocation; 
 
 	public void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
-		WebView webview = new WebView(this);
-
 		getWindow().requestFeature(Window.FEATURE_PROGRESS);
+		WebView webview = new WebView(this);
+		
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Seekr");
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+		
+
 		webview.getSettings().setJavaScriptEnabled(true);
 
 		final Activity activity = this;

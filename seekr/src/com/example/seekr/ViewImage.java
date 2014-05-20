@@ -100,7 +100,7 @@ public class ViewImage extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.add(0, MENU_RADAR, 0, R.string.menu_radar)
-                .setIcon(R.drawable.ic_menu_radar)
+                .setIcon(R.drawable.ic_action_next_item)
                 .setAlphabeticShortcut('R');
         menu.add(0, MENU_MAP, 0, R.string.menu_map)
                 .setIcon(R.drawable.ic_menu_map)

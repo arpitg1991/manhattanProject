@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SeekR</string>
+    <string name="app_name">Seekr</string>
     <string name="app_id">274143092764504</string>
     <string name="hello_world">Hello world!</string>
     <string name="get_started">To get started, login using Facebook</string>

@@ -94,6 +94,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
         }
         
         holder.button1.setCompoundDrawablesWithIntrinsicBounds(null,context.getResources().getDrawable(R.drawable.ic_action_place), null, null);
+        holder.button1.setTextColor(Color.WHITE);
         holder.button1.setText("Map");
         holder.button1.setOnClickListener(new View.OnClickListener() {
  
@@ -152,6 +153,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
         
         holder.button2.setCompoundDrawablesWithIntrinsicBounds(null,context.getResources().getDrawable(R.drawable.ic_action_time), null, null);
         holder.button2.setText(timeDisplayString);
+        holder.button2.setTextColor(Color.WHITE);
         holder.button2.setOnClickListener(new View.OnClickListener() {
  
                               @Override
@@ -174,6 +176,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
         
         
         holder.button3.setCompoundDrawablesWithIntrinsicBounds(null,context.getResources().getDrawable(R.drawable.ic_action_reply_all), null, null);
+        holder.button3.setTextColor(Color.WHITE);
         holder.button3.setText("Reply");
         holder.button3.setOnClickListener(new  View.OnClickListener() {
  
