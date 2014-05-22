@@ -15,9 +15,9 @@ Vipul Raheja - <b>vipulraheja</b>
 
 <b>TODOs</b>
 ------------------------
-- Vipul, Arpit : Integrate Twitter Datamining code into Seekr
-- Arpit : Get image from facebook
-- Anjishnu : add categories and open search.
+- Facebook share integration?
+- Final project report
+- Code clean (Anjishnu)
 
 DONE -
 --------------
@@ -34,7 +34,9 @@ DONE -
 - Anjishnu: - Integrate comments/chat with API
 - Anjishnu: Overlay Panoramio useless map with cool WebView
 - Arpit : Remove Posts if X no. of ppl commented
-
+- Vipul, Arpit : Integrate Twitter Datamining code into Seekr
+- Arpit : Get image from facebook
+- Anjishnu : add categories and open search.
 
 <b>APIs</b>
 ------------------------
