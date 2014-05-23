@@ -18,8 +18,8 @@ Vipul Raheja - <b>vipulraheja</b>
 - Facebook share integration?
 - Final project report
 - Code clean (Anjishnu)
-
-DONE -
+<br>
+<b>DONE</b> -
 --------------
 - Vipul : Maps!! --> Replaced by the Awesome Place Search Foursquare API
 - Anjishnu: Integrate makeNewPost with API
