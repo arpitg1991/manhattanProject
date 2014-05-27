@@ -102,6 +102,9 @@ public class ItemListActivity extends Activity {
         mLatitudeE6 = intent.getIntExtra(ImageManager.LATITUDE_E6_EXTRA, Integer.MIN_VALUE);
         mLongitudeE6 = intent.getIntExtra(ImageManager.LONGITUDE_E6_EXTRA, Integer.MIN_VALUE);
         
+        
+        UserInfoProvider.getInstance().checkInit();
+        
         actionBarSetup();
         
         swipelistview=(SwipeListView)findViewById(R.id.example_swipe_lv_list);
@@ -239,7 +242,7 @@ public class ItemListActivity extends Activity {
          
          String username = UserInfoProvider.getInstance().getUserName();
          Log.i(tag, "name:"+username );
-         menu.findItem(R.id.action_username).setTitle("<<"+username+">>");
+         menu.findItem(R.id.action_username).setTitle("<< "+username+" >>");
          
          
          OnQueryTextListener queryListener = new OnQueryTextListener() {
@@ -338,7 +341,14 @@ public class ItemListActivity extends Activity {
 			startSearch("@"+userId, false, null, false);
 			Toast.makeText(getApplicationContext(), "Getting posts associated with your ID", Toast.LENGTH_SHORT).show();
 			return true;
-			
+		
+		case R.id.action_reco:
+			userId = UserInfoProvider.getInstance().getUserId();
+			//String userName = UserInfoProvider.getInstance().getUserName();
+			startSearch("!"+userId, false, null, false);
+			Toast.makeText(getApplicationContext(), "Would you like to find recommended posts for "+userName+ "?", Toast.LENGTH_SHORT).show();
+			return true;
+		
 		default:
 			finish();
 			return super.onOptionsItemSelected(item);

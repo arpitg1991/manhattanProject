@@ -1554,10 +1554,11 @@ containing a value of this type.
         public static final int action_mode_close_button=0x7f06002f;
         public static final int action_music=0x7f060088;
         public static final int action_offers=0x7f06008a;
+        public static final int action_reco=0x7f06008b;
         public static final int action_search=0x7f060082;
         public static final int action_settings=0x7f060081;
         public static final int action_sports=0x7f060087;
-        public static final int action_username=0x7f06008b;
+        public static final int action_username=0x7f06008c;
         public static final int activity_chooser_view_content=0x7f060030;
         public static final int always=0x7f06000b;
         public static final int back=0x7f06005e;
@@ -1664,7 +1665,7 @@ containing a value of this type.
         public static final int splashFragment=0x7f06006b;
         public static final int splash_icon=0x7f060076;
         public static final int split_action_bar=0x7f060029;
-        public static final int start_seeking=0x7f06008c;
+        public static final int start_seeking=0x7f06008d;
         public static final int submit_area=0x7f060044;
         public static final int swipe_button1=0x7f06005f;
         public static final int swipe_button2=0x7f060060;
@@ -1817,6 +1818,7 @@ containing a value of this type.
         public static final int action_food=0x7f0b005d;
         public static final int action_music=0x7f0b005f;
         public static final int action_offers=0x7f0b0060;
+        public static final int action_reco=0x7f0b0062;
         public static final int action_search=0x7f0b004a;
         public static final int action_settings=0x7f0b0048;
         public static final int action_sports=0x7f0b005c;
@@ -1969,10 +1971,10 @@ containing a value of this type.
         public static final int untitled=0x7f0b0050;
     }
     public static final class style {
-        public static final int ActionBar_Solid_Coolactionbar=0x7f0c008e;
-        public static final int ActionBar_Transparent_Coolactionbar=0x7f0c008f;
-        public static final int ActionBarTabStyle_Coolactionbar=0x7f0c0092;
-        public static final int ActionButton_CloseMode_Coolactionbar=0x7f0c0095;
+        public static final int ActionBar_Solid_Coolactionbar=0x7f0c008f;
+        public static final int ActionBar_Transparent_Coolactionbar=0x7f0c0090;
+        public static final int ActionBarTabStyle_Coolactionbar=0x7f0c0093;
+        public static final int ActionButton_CloseMode_Coolactionbar=0x7f0c0096;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -1999,15 +2001,16 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0c0086;
-        public static final int DropDownListView_Coolactionbar=0x7f0c0091;
-        public static final int DropDownNav_Coolactionbar=0x7f0c0093;
+        public static final int DropDownListView_Coolactionbar=0x7f0c0092;
+        public static final int DropDownNav_Coolactionbar=0x7f0c0094;
         public static final int MyListBackContent=0x7f0c0088;
+        public static final int MyListBody=0x7f0c008d;
         public static final int MyListButtonAction=0x7f0c008a;
         public static final int MyListFrontContent=0x7f0c0089;
         public static final int MyListImage=0x7f0c008b;
         public static final int MyListTitle=0x7f0c008c;
-        public static final int PopupMenu_Coolactionbar=0x7f0c0090;
-        public static final int ProgressBar_Coolactionbar=0x7f0c0094;
+        public static final int PopupMenu_Coolactionbar=0x7f0c0091;
+        public static final int ProgressBar_Coolactionbar=0x7f0c0095;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0c0063;
@@ -2101,10 +2104,10 @@ containing a value of this type.
         /**  Base platform-dependent theme providing a light-themed activity. 
          */
         public static final int Theme_Base_Light=0x7f0c007d;
-        public static final int Theme_Coolactionbar=0x7f0c008d;
+        public static final int Theme_Coolactionbar=0x7f0c008e;
         /**  this style is only referenced in a Light.DarkActionBar based theme 
          */
-        public static final int Theme_Coolactionbar_Widget=0x7f0c0096;
+        public static final int Theme_Coolactionbar_Widget=0x7f0c0097;
         public static final int Theme_Panoramio=0x7f0c0087;
         /**  Styles in here can be extended for customisation in your application. Each utilises
          one of the Base styles. If Holo themes are available on the current platform version

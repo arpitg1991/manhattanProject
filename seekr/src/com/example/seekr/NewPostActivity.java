@@ -122,7 +122,10 @@ public class NewPostActivity extends FragmentActivity {
 						addressList.clear();
 						String searchLoc = eventAddress.getText().toString();
 						System.out.println(searchLoc);
-						new HttpAsyncTask().execute("https://api.foursquare.com/v2/venues/search?client_id=NPYFXJLBUOCYQUXZOR4VUCRWQ5X3YTHVRXY5ULLPCSN1TCIE&client_secret=A0DK4XHO34SDN0WZGLV4JGYVJ3EFQSZX3ODJNPA5NWDDEQ4M&v=20130815%20&ll=40.7,-74%20&query=" + searchLoc.replaceAll("\\s+", "%20"));
+						UserInfoProvider info = UserInfoProvider.getInstance();
+						String url = "https://api.foursquare.com/v2/venues/search?client_id=NPYFXJLBUOCYQUXZOR4VUCRWQ5X3YTHVRXY5ULLPCSN1TCIE&client_secret=A0DK4XHO34SDN0WZGLV4JGYVJ3EFQSZX3ODJNPA5NWDDEQ4M&v=20130815%20&ll="+info.getLatitude().toString()+","+info.getLongitude().toString()+"%20&query=" + searchLoc.replaceAll("\\s+", "%20");
+						new HttpAsyncTask().execute(url);
+						Log.i(tag, "GET requested on URL:"+url);
 					}
 				});
 

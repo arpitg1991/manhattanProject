@@ -113,6 +113,11 @@ public class Panoramio extends MapActivity implements OnClickListener {
         
         Log.i(new Integer(latitudeE6).toString(), new Integer(longitudeE6).toString());
         
+        UserInfoProvider userInfoProvder = UserInfoProvider.getInstance();
+        userInfoProvder.setLatE6(latitudeE6);
+        userInfoProvder.setLonE6(longitudeE6);
+        
+        
         Intent i = new Intent(this, CustomWebActivity.class);
         //Intent i = new Intent(this, MapDisplayActivity.class);
         i.putExtra(ImageManager.ZOOM_EXTRA, zoom);
@@ -179,21 +184,25 @@ public class Panoramio extends MapActivity implements OnClickListener {
         
         Log.i(new Integer(latitudeE6).toString(), new Integer(longitudeE6).toString());
         
+        UserInfoProvider userInfoProvder = UserInfoProvider.getInstance();
+        userInfoProvder.setLatE6(latitudeE6);
+        userInfoProvder.setLonE6(longitudeE6);
+        
         Intent i = new Intent(this, CustomWebActivity.class);
         //Intent i = new Intent(this, MapDisplayActivity.class);
         i.putExtra(ImageManager.ZOOM_EXTRA, zoom);
         i.putExtra(ImageManager.LATITUDE_E6_EXTRA, latitudeE6);
         i.putExtra(ImageManager.LONGITUDE_E6_EXTRA, longitudeE6);
 
-        float minLong = ((float) (longitudeE6 - longHalfSpan)) / MILLION;
-        float maxLong = ((float) (longitudeE6 + longHalfSpan)) / MILLION;
-        float minLat = ((float) (latitudeE6 - latHalfSpan)) / MILLION;
-        float maxLat = ((float) (latitudeE6 + latHalfSpan)) / MILLION;
-        
-        mImageManager.clear();
-        
-        // Start downloading
-        //mImageManager.load(minLong, maxLong, minLat, maxLat);
+//        float minLong = ((float) (longitudeE6 - longHalfSpan)) / MILLION;
+//        float maxLong = ((float) (longitudeE6 + longHalfSpan)) / MILLION;
+//        float minLat = ((float) (latitudeE6 - latHalfSpan)) / MILLION;
+//        float maxLat = ((float) (latitudeE6 + latHalfSpan)) / MILLION;
+//        
+//        mImageManager.clear();
+//        
+//        // Start downloading
+//        //mImageManager.load(minLong, maxLong, minLat, maxLat);
         
         // Show results
         startActivity(i);

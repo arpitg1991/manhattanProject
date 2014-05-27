@@ -84,6 +84,8 @@ public View getView(int position, View convertView, ViewGroup parent) {
         
         holder.itemName.setText(itemdata.getItemName());
         holder.text.setText(itemdata.getText());
+        holder.itemName.setTextColor(Color.GRAY);
+        //holder.itemName.setBackgroundResource(R.drawable.picture_frame);
         
         
         if (itemdata.getUserPic()!=null) {

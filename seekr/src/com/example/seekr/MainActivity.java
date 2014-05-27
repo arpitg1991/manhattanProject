@@ -249,7 +249,7 @@ public class MainActivity extends FragmentActivity {
 						// USER NAME
 						USER_NAME = user.getName();
 						spy.setUserName(USER_NAME);
-
+						spy.setContext(getApplicationContext());
 
 						AsyncTask<Void, Void, Bitmap> t = new AsyncTask<Void, Void, Bitmap>(){
 							protected Bitmap doInBackground(Void... params) {

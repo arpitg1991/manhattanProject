@@ -33,23 +33,6 @@ import org.json.JSONObject;
 
 
 import org.json.JSONTokener;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //import org.json.JSONObject;
 import com.google.gson.*;
 
@@ -457,8 +440,36 @@ public class AsyncWebPostMaster extends AsyncTask {
 				JSONObject json = new JSONObject(cres.responseBody);
 				JSONArray jarray = (JSONArray)json.get("post");
 				
-
+				/**
+				 * 	{"post":[],"simWords""man utd","liverpool","spurs","chelsea"]}
+				 * 	
+				 */
+				try {
+				JSONArray simWords = json.getJSONArray("simWords");
+				String displayString = "You searched for "+simWords.getString(0) + " , you may also be interested in searching for ";
+				for(int x=1; x<simWords.length(); x++)
+				{
+					
+					if (simWords.length()>2 && x==simWords.length()-1){
+						displayString += " or ";
+					} 
+					
+					if (simWords.length()>2 && x==simWords.length()-2)
+					{
+						displayString+= simWords.getString(x)+"";
+					} else {
+					displayString+= simWords.getString(x)+", ";
+					}
+					
+				}
 				
+				
+				Toast.makeText(this.myContext, displayString, Toast.LENGTH_LONG).show();
+				Toast.makeText(this.myContext, displayString, Toast.LENGTH_LONG).show();
+				
+				} catch(Exception e) { 
+					Log.i(tag, "No simwords found");
+				}
 				for (int i=0; i<jarray.length(); i++)
 				{
 					json = jarray.getJSONObject(i);
