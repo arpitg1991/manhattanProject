@@ -20,8 +20,6 @@ Vipul Raheja - <b>vipulraheja</b>
 <b>TODOs</b>
 ------------------------
 - Facebook share integration?
-- Final project report
-- Code clean (Anjishnu)
 <br>
 
 <b>DONE</b> 
