@@ -4,6 +4,11 @@ SEEKR
 Codename: manhattanProject
 ================
 
+Seekr App Demo Videos-
+----------------
+GUI Demo:             https://www.youtube.com/watch?v=3HYaGLqJs0U
+ML and Search Demo:   https://www.youtube.com/watch?v=_wcRSYx5Buk
+
 
 Top secret cloud project
 
